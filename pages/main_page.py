@@ -18,16 +18,27 @@ class Main_page(Base):
         self.driver = driver
 
     # Locators 
-    select_product_1 = "//button[@id='add-to-cart-sauce-labs-backpack']"
-    select_product_2 = "//button[@id='add-to-cart-sauce-labs-bike-light']"
-    select_product_3 = "//button[@id='add-to-cart-sauce-labs-bolt-t-shirt']"
+    cookies_notice_button = "//button[@id='client-cookies-notice-button']"
 
-    cart = "//div[@id='shopping_cart_container']"
+    sort_dropdo_button = "//div[@class='sort ui dropdown small-12 selection']"
+    data_value_a_z = "//div[@class='item'][3]"
+
+
+    select_product_1 = "//button[@class='button product-item__button button_for_product-card cart-btn js-order-product js-cart-btn'][1]" # локатор товара 
+    # select_product_2 = "//button[@id='add-to-cart-sauce-labs-bike-light']"
+    # select_product_3 = "//button[@id='add-to-cart-sauce-labs-bolt-t-shirt']"
+
+    cart = "//span[@class='top-cart__notification top-cart__notification--round-3 quantity-items']" # корзина 
+    cart_offer_order = "//a[@class='button button_for_top-cart-drop-down']" # оформить заказ
     
     menu ="//button[@id='react-burger-menu-btn']"
     link_about = "//a[@id='about_sidebar_link']"
 
-    about_url = "https://saucelabs.com/"
+    shop_url = "https://капибара161.рф/products"
+    about_url = "https://капибара161.рф/"
+    sony_games = "https://капибара161.рф/products/category/5374852"
+    sony_games_ps5 = "https://капибара161.рф/products/category/5382071"
+    sony_new_games_ps5 = "https://капибара161.рф/products/category/5382072"
 
 
     # Getters

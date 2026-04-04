@@ -2,7 +2,6 @@ import datetime
 from tests.conftest import set_up
 
 
-
 class Base():
     def __init__(self, driver):
         self.driver = driver
