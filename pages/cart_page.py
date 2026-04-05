@@ -17,11 +17,14 @@ class Cart_page(Base):
         self.driver = driver
 
     # Locators 
-    checkout_button = "//button[@id='checkout']"
+    cart = "//span[@class='top-cart__notification top-cart__notification--round-3 quantity-items']" # корзина 
+    cart_offer_order = "//a[@class='button button_for_top-cart-drop-down']" # оформить заказ
+    choise_add = "//span[@class='checkmark']"
+    go_to_buy = "//button[@id='js-next-stage']"
 
     # Getters
-    def get_checkout_button(self):
-        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, self.checkout_button)))
+    def get_cart(self):
+        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, self.cart)))
                                                                                
     # Actions
     def click_checkout_button(self):

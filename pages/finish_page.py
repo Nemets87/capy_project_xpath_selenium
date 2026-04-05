@@ -18,7 +18,7 @@ class Finish_page(Base):
 
     # методы
     def finish(self):
-        final_page_true = "https://www.saucedemo.com/checkout-complete.html"
+        final_page_true = "https://капибара161.рф/cart/checkout"
         self.get_current_url() # Method get current url
         self.assert_url(final_page_true)
         self.get_screenshot()

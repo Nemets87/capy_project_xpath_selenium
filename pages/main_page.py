@@ -18,22 +18,28 @@ class Main_page(Base):
         self.driver = driver
 
     # Locators 
-    cookies_notice_button = "//button[@id='client-cookies-notice-button']"
 
-    sort_dropdo_button = "//div[@class='sort ui dropdown small-12 selection']"
-    data_value_a_z = "//div[@class='item'][3]"
+    cookies_notice_button = "//button[@id='client-cookies-notice-button']" # локатор кукис на старте страницы 
+    products = "//a[@href='/products']"
+    
+
+    sort_dropdo_button = "//div[@class='sort ui dropdown small-12 selection']" # выбор меню сортировки товаров 
+    data_value_low_to_top_price = "//div[@class='item'][3]" # самая дешевая идет первой
+    data_value_top_to_low_price = "//div[@class='item'][2]" # самая дорогая идет первой 
+    data_value_a_z_text = "//div[text()='Наименование (А—Я)']"
+
+    sony_games_locator = "//a[@href='/products/category/5374852']"
 
 
-    select_product_1 = "//button[@class='button product-item__button button_for_product-card cart-btn js-order-product js-cart-btn'][1]" # локатор товара 
+    select_product = "//button[@class='button product-item__button button_for_product-card cart-btn js-order-product js-cart-btn']" # локатор товара 
     # select_product_2 = "//button[@id='add-to-cart-sauce-labs-bike-light']"
     # select_product_3 = "//button[@id='add-to-cart-sauce-labs-bolt-t-shirt']"
 
-    cart = "//span[@class='top-cart__notification top-cart__notification--round-3 quantity-items']" # корзина 
-    cart_offer_order = "//a[@class='button button_for_top-cart-drop-down']" # оформить заказ
+
     
     menu ="//button[@id='react-burger-menu-btn']"
     link_about = "//a[@id='about_sidebar_link']"
-
+    url_main_page = "https://капибара161.рф/"
     shop_url = "https://капибара161.рф/products"
     about_url = "https://капибара161.рф/"
     sony_games = "https://капибара161.рф/products/category/5374852"
@@ -43,23 +49,23 @@ class Main_page(Base):
 
     # Getters
     def get_select_product_1(self):
-        return WebDriverWait(self.driver, 30).until(EC.presence_of_element_located((By.XPATH, self.select_product_1)))
+        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, self.select_product_1)))
     
     def get_select_product_2(self):
-        return WebDriverWait(self.driver, 30).until(EC.presence_of_element_located((By.XPATH, self.select_product_2)))
+        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, self.select_product_2)))
     
     def get_select_product_3(self):
-        return WebDriverWait(self.driver, 30).until(EC.presence_of_element_located((By.XPATH, self.select_product_3)))
+        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, self.select_product_3)))
     
 
     def get_cart(self):
-        return WebDriverWait(self.driver, 30).until(EC.presence_of_element_located((By.XPATH, self.cart)))
+        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, self.cart)))
     
     def get_menu(self):
-        return WebDriverWait(self.driver, 30).until(EC.presence_of_element_located((By.XPATH, self.menu)))
+        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, self.menu)))
     
     def get_link_about(self):
-        return WebDriverWait(self.driver, 30).until(EC.presence_of_element_located((By.XPATH, self.link_about)))
+        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, self.link_about)))
                                                                                
     # Actions
 

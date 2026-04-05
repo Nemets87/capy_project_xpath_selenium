@@ -9,8 +9,10 @@ from selenium.webdriver.support import expected_conditions as EC
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from base.base_class import Base
 
+"""Страница Оформление заказа и класс Viewcart_pag ее курирует"""
+class Viewcart_page(Base):
 
-class Client_information__page(Base):
+    url = 'https://капибара161.рф/products/viewcart' # страница подтверждения заказа
 
     def __init__(self, driver):
         super().__init__(driver)
@@ -21,7 +23,9 @@ class Client_information__page(Base):
     email = "//input[@id='email']" # мыло 
     phone = "//input[@id='phone']" # телефон
     check_approval = "//label[@class='inline-block -mg-l-10 -mg-r-10']"  # or //label[@for='field1'] # согласие на обработку данных
-    
+    approval_confirmation = "//button[@class='cart__button new-cart-recipient-data__button']" # сохранить данные
+    place_an_order = "//button[@class='cart__button new-cart-recipient-data__button']" # оформить заказ
+    order_stage = "//button[@id='js-order-stage']" # финал оформления заказа
 
     # Getters
     def get_name(self):
@@ -37,31 +41,31 @@ class Client_information__page(Base):
         return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, self.check_approval)))
     # дали согласие на обработку данных
     
-    # Actions
-    def name(self, name):
-       self.get_first_name().send_keys(name)
-       print("input name")
+    
+# Actions
 
-    def email(self, email):
-       self.get_last_name().send_keys(email)
-       print("input last_name")
+    def input_user_name(self, user_name):
+       self.get_user_name().send_keys(user_name)
+       print("input user_name")
 
-    def phone(self, phone):
-       self.get_phone().send_keys(phone)
-       print("input phone")
+    def input_user_password(self, password):
+       self.get_password().send_keys(password)
+       print("input password")
 
-    def cget_check_approval(self):
-       self.get_get_check_approval().click()
-       print("Click get_check_approval")
+    def click_login_button(self):
+       self.get_login_button().click()
+       print("Click login_button")
 
-   # Methods
-    def input_information(self):
+
+# методы
+    def autorization(self):
+        self.driver.get(self.url)
+        self.driver.maximize_window()
         self.get_current_url() # Method get current url
-        self.input_name("Ivan")
-        self.input_last_name("Fedorov")
-        self.input_zip("344038")
-        self.click_continue_button()
-()
+        self.input_user_name("standard_user")
+        self.input_user_password("secret_sauce")
+        self.click_login_button()
+        self.assert_word(self.get_main_word(), "Products") # Method assert word
    
 # Этот блок выполняется только если файл запущен напрямую (не при импорте)
 if __name__ == "__main__":
