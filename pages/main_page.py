@@ -18,107 +18,66 @@ class Main_page(Base):
         self.driver = driver
 
     # Locators 
-
+    # //button[@id='client-cookies-notice-button']
     cookies_notice_button = "//button[@id='client-cookies-notice-button']" # локатор кукис на старте страницы 
+    burger_button = "//span[@id='burger-btn-text']" # выбор кнопки hellow (меню бургер справа)
     products = "//a[@href='/products']"
     
-
-    sort_dropdo_button = "//div[@class='sort ui dropdown small-12 selection']" # выбор меню сортировки товаров 
-    data_value_low_to_top_price = "//div[@class='item'][3]" # самая дешевая идет первой
-    data_value_top_to_low_price = "//div[@class='item'][2]" # самая дорогая идет первой 
-    data_value_a_z_text = "//div[text()='Наименование (А—Я)']"
-
-    sony_games_locator = "//a[@href='/products/category/5374852']"
-
-
-    select_product = "//button[@class='button product-item__button button_for_product-card cart-btn js-order-product js-cart-btn']" # локатор товара 
-    # select_product_2 = "//button[@id='add-to-cart-sauce-labs-bike-light']"
-    # select_product_3 = "//button[@id='add-to-cart-sauce-labs-bolt-t-shirt']"
-
-
-    
-    menu ="//button[@id='react-burger-menu-btn']"
-    link_about = "//a[@id='about_sidebar_link']"
-    url_main_page = "https://капибара161.рф/"
-    shop_url = "https://капибара161.рф/products"
-    about_url = "https://капибара161.рф/"
-    sony_games = "https://капибара161.рф/products/category/5374852"
-    sony_games_ps5 = "https://капибара161.рф/products/category/5382071"
-    sony_new_games_ps5 = "https://капибара161.рф/products/category/5382072"
-
-
     # Getters
-    def get_select_product_1(self):
-        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, self.select_product_1)))
-    
-    def get_select_product_2(self):
-        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, self.select_product_2)))
-    
-    def get_select_product_3(self):
-        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, self.select_product_3)))
-    
+    def get_cookies_notice_button(self):
+        return WebDriverWait(self.driver, 30).until(EC.presence_of_element_located((By.XPATH, self.cookies_notice_button)))
 
-    def get_cart(self):
-        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, self.cart)))
-    
-    def get_menu(self):
-        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, self.menu)))
-    
-    def get_link_about(self):
-        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, self.link_about)))
-                                                                               
+    def get_burger_button(self):
+        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, self.burger_button))) # целимся в выбор кнопки hellow (меню бургер справа)
+                                                                      
     # Actions
+    def click_cookies_notice_button(self): # кликаем выбор кукис на старте страницы 
+       self.cookies_notice_button().click()
+       print("Click get_burger_butto")
 
-    def click_select_product_1(self):
-       self.get_select_product_1().click()
-       print("Click select_product_1")
-
-    def click_select_product_2(self):
-       self.get_select_product_2().click()
-       print("Click select_product_2")
-
-    def click_select_product_3(self):
-       self.get_select_product_3().click()
-       print("Click select_product_3")
-
-
-    def click_cart(self):
-       self.get_cart().click()
-       print("Click cart")
-
-    def click_menu(self):
-       self.get_menu().click()
-       print("Click burger_menu")
-
-    def click_link_about(self):
-       self.get_link_about().click()
-       print("Click about")
-
+    def click_burger_button(self): # кликаем выбор кнопки hellow (меню бургер справа)
+       self.get_burger_button().click()
+       print("Click get_burger_butto")
 
     # методы
-    def select_products_1(self):
+    def select_cookies_notice_button(self):
         self.get_current_url() # Method get current url
-        self.click_select_product_1()
-        self.click_cart()
+        self.click_cookies_notice_button()
 
-    def select_products_2(self):
+    def select_burger_button(self):
         self.get_current_url() # Method get current url
-        self.click_select_product_2()
-        self.click_cart()
-
-    def select_products_3(self):
-        self.get_current_url() # Method get current url
-        self.click_select_product_3()
-        self.click_cart()
-
-
-    def select_menu_about(self):
-        self.get_current_url() # Method get current url
-        self.click_menu()
-        self.click_link_about()
-        self.assert_url(self.about_url)
+        self.click_burger_button()
        
     # Этот блок выполняется только если файл запущен напрямую (не при импорте)
 if __name__ == "__main__":
     # Здесь можно написать код для самостоятельного тестирования класса
     pass
+
+
+
+
+    sort_dropdo_button = "//div[@class='sort ui dropdown small-12 selection']" # выбор меню сортировки товаров 
+
+    item_active_selected = "//div[@class='item active selected']"
+    data_value_low_to_top_price = "//div[@class='item'][1]" # самая дорогая идет первой 
+    data_value_low_to_top_price = "//div[@class='item'][2]" # самая дешевая идет первой
+    data_value_a_z_text = "//div[text()='Наименование (А—Я)']" # А—Я
+    data_value_z_a_text = "//div[text()='Наименование (Я—А)']" # Я-А
+
+    select_product = "//button[@class='button product-item__button button_for_product-card cart-btn js-order-product js-cart-btn']" # локатор товара 
+
+    # sony_games_locator = "//a[@href='/products/category/5374852']"
+
+
+    select_product = "//button[@class='button product-item__button button_for_product-card cart-btn js-order-product js-cart-btn']" # локатор товара 
+ 
+
+    # menu ="//button[@id='react-burger-menu-btn']"
+    # link_about = "//a[@id='about_sidebar_link']"
+
+    # main_page_url = "https://капибара161.рф/"
+    # shop_url = "https://капибара161.рф/products"
+    # about_url = "https://капибара161.рф/"
+    # sony_games = "https://капибара161.рф/products/category/5374852"
+    # sony_games_ps5 = "https://капибара161.рф/products/category/5382071"
+    # sony_new_games_ps5 = "https://капибара161.рф/products/category/5382072"
