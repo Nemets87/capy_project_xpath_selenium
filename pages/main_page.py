@@ -56,20 +56,20 @@ if __name__ == "__main__":
 
 
 
-    sort_dropdo_button = "//div[@class='sort ui dropdown small-12 selection']" # выбор меню сортировки товаров 
+    # sort_dropdo_button = "//div[@class='sort ui dropdown small-12 selection']" # выбор меню сортировки товаров 
 
-    item_active_selected = "//div[@class='item active selected']"
-    data_value_low_to_top_price = "//div[@class='item'][1]" # самая дорогая идет первой 
-    data_value_low_to_top_price = "//div[@class='item'][2]" # самая дешевая идет первой
-    data_value_a_z_text = "//div[text()='Наименование (А—Я)']" # А—Я
-    data_value_z_a_text = "//div[text()='Наименование (Я—А)']" # Я-А
+    # item_active_selected = "//div[@class='item active selected']"
+    # data_value_low_to_top_price = "//div[@class='item'][1]" # самая дорогая идет первой 
+    # data_value_low_to_top_price = "//div[@class='item'][2]" # самая дешевая идет первой
+    # data_value_a_z_text = "//div[text()='Наименование (А—Я)']" # А—Я
+    # data_value_z_a_text = "//div[text()='Наименование (Я—А)']" # Я-А
 
-    select_product = "//button[@class='button product-item__button button_for_product-card cart-btn js-order-product js-cart-btn']" # локатор товара 
+    # select_product = "//button[@class='button product-item__button button_for_product-card cart-btn js-order-product js-cart-btn']" # локатор товара 
 
-    # sony_games_locator = "//a[@href='/products/category/5374852']"
+    # # sony_games_locator = "//a[@href='/products/category/5374852']"
 
 
-    select_product = "//button[@class='button product-item__button button_for_product-card cart-btn js-order-product js-cart-btn']" # локатор товара 
+    # select_product = "//button[@class='button product-item__button button_for_product-card cart-btn js-order-product js-cart-btn']" # локатор товара 
  
 
     # menu ="//button[@id='react-burger-menu-btn']"

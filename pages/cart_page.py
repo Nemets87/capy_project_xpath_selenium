@@ -18,25 +18,25 @@ class Cart_page(Base):
 
     # Locators 
 
-    cart_sender = //span[@class='cart-btn__text product-item__button-text']
-    cart = "//span[@class='top-cart__notification top-cart__notification--round-3 quantity-items']" # корзина 
+    # cart_sender = "//span[@class='cart-btn__text product-item__button-text']" # таргет на товар
+    # cart = "//span[@class='top-cart__notification top-cart__notification--round-3 quantity-items']" # корзина 
     cart_offer_order = "//a[@class='button button_for_top-cart-drop-down']" # оформить заказ
-    choise_add = "//span[@class='checkmark']"
-    go_to_buy = "//button[@id='js-next-stage']"
+    # choise_add = "//span[@class='checkmark']"
+    # go_to_buy = "//button[@id='js-next-stage']"
 
     # Getters
-    def get_cart(self):
-        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, self.cart)))
+    def get_cart_offer_ordert(self):
+        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, self.cart_offer_order)))
                                                                                
     # Actions
-    def click_checkout_button(self):
-        self.get_checkout_button().click()
+    def click_cart_offer_order(self):
+        self.get_cart_offer_ordert().click()
         print("checkout_button")
 
     # методы
-    def product_confirmation(self):
+    def select_cart_offer_order(self):
         self.get_current_url() # Method get current url
-        self.click_checkout_button()
+        self.click_cart_offer_order()
         
   
 # Этот блок выполняется только если файл запущен напрямую (не при импорте)
