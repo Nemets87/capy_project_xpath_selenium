@@ -20,7 +20,7 @@ class Client_information__page(Base):
     name = "//input[@id='name']" # имя
     email = "//input[@id='email']" # мыло 
     phone = "//input[@id='phone']" # телефон
-    check_approval =  "//input[@id='field1']" # "//label[@class='inline-block -mg-l-10 -mg-r-10']"  # or //input[@id='field1'] # согласие на обработку данных
+    check_approval = "//div[@class='checkbox-element dynamic-field-checkbox']" # "//label[@class='inline-block -mg-l-10 -mg-r-10']"  # or //input[@id='field1'] # согласие на обработку данных
     
 
     # Getters
@@ -33,7 +33,7 @@ class Client_information__page(Base):
     def get_phone(self):
         return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, self.phone)))
     #   забили телефон      
-    def get_check_approval (self):
+    def get_check_approval(self):
         return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, self.check_approval)))
     # дали согласие на обработку данных
     
@@ -50,7 +50,7 @@ class Client_information__page(Base):
        self.get_phone().send_keys(phone)
        print("input phone")
 
-    def get_check_approval(self):
+    def click_check_approval(self):
        self.get_check_approval().click()
        print("Click get_check_approval")
 
@@ -60,7 +60,7 @@ class Client_information__page(Base):
         self.input_name("Ivan")
         self.input_email("bonustime161@yandex.ru")
         self.input_phone("89614201118")
-        self.get_check_approval()
+        self.click_check_approval()
 ()
    
 # Этот блок выполняется только если файл запущен напрямую (не при импорте)
