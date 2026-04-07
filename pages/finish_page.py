@@ -16,12 +16,21 @@ class Finish_page(Base):
         super().__init__(driver)
         self.driver = driver
 
+    # Locators 
+    main_word = "//div[@class='cart__checkout-custom-text text-center']"
+ 
+
+    # Getters
+    def get_main_word(self):
+        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, self.main_word)))
+ 
+
     # методы
     def finish(self):
-        final_page_true = "https://капибара161.рф/products/viewcart"
-        # final_page_true = "https://капибара161.рф/cart/checkout"
+        final_page_true = "https://xn--161-5cdaaf9cq5co.xn--p1ai/products/viewcart"
         self.get_current_url() # Method get current url
-        # self.assert_url(final_page_true)
+        self.assert_url(final_page_true)
+        self.assert_word(self.get_main_word(), 'Спасибо за заказ. Мы свяжемся с Вами в ближайшее время.') # Method assert word
         self.get_screenshot()
 
    # Этот блок выполняется только если файл запущен напрямую (не при импорте)

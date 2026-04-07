@@ -21,7 +21,10 @@ class Client_information__page(Base):
     email = "//input[@id='email']" # мыло 
     phone = "//input[@id='phone']" # телефон
     check_approval = "//div[@class='checkbox-element dynamic-field-checkbox']" # "//label[@class='inline-block -mg-l-10 -mg-r-10']"  # or //input[@id='field1'] # согласие на обработку данных
-    
+    check_save = "//button[@id='js-save-form']"
+    check_order = "//button[@id='js-order-stage']"
+
+
 
     # Getters
     def get_name(self):
@@ -36,6 +39,13 @@ class Client_information__page(Base):
     def get_check_approval(self):
         return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, self.check_approval)))
     # дали согласие на обработку данных
+
+    def get_check_save(self):
+        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, self.check_save)))
+    
+    def get_check_order(self):
+        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, self.check_order)))
+    
     
     # Actions
     def input_name(self, name):
@@ -54,13 +64,26 @@ class Client_information__page(Base):
        self.get_check_approval().click()
        print("Click get_check_approval")
 
+
+    def click_check_save(self):
+       self.get_check_save().click()
+       print("Click get_check_save")
+
+    
+    def click_check_order(self):
+       self.get_check_order().click()
+       print("Click get_check_order")
+
    # Methods
     def input_information(self):
         self.get_current_url() # Method get current url
+        print(self.get_current_url)
         self.input_name("Ivan")
         self.input_email("bonustime161@yandex.ru")
         self.input_phone("89614201118")
         self.click_check_approval()
+        self.click_check_save()
+        self.click_check_order()
 ()
    
 # Этот блок выполняется только если файл запущен напрямую (не при импорте)

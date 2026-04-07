@@ -79,6 +79,10 @@ class Category_page(Base):
        self.get_data_value_top_low_price().click()
        print("Click get_sony_playstation_5_new_games_button")
 
+    def click_data_value_low_to_top_price(self): # кликаем выбор критерия где самая дорогая идет первой 
+       self.get_data_value_low_to_top_price().click()
+       print("Click get_data_value_low_to_top_price")
+
     def click_get_select_product(self): # кликаем выбор критерия где самая дорогая идет первой 
        self.get_select_product().click()
        print("Click select_product_button")
@@ -100,6 +104,11 @@ class Category_page(Base):
     def select_data_value_top_low_price(self): # вызываем выбор кнопки каталог товаров Игры Sony Playstation 5 новые игры
         self.get_current_url() # Method get current url
         self.click_data_value_top_low_price()
+
+    
+    def select_data_value_low_to_top_price(self): # вызываем выбор кнопки каталог товаров Игры Sony Playstation 5 новые игры
+        self.get_current_url() # Method get current url
+        self.click_data_value_low_to_top_price()
 
     def select_get_select_product(self): # вызываем выбор кнопки каталог товаров Игры Sony Playstation 5 новые игры
         self.get_current_url() # Method get current url

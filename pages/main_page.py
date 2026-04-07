@@ -25,14 +25,14 @@ class Main_page(Base):
     
     # Getters
     def get_cookies_notice_button(self):
-        return WebDriverWait(self.driver, 30).until(EC.presence_of_element_located((By.XPATH, self.cookies_notice_button)))
+        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, self.cookies_notice_button)))
 
     def get_burger_button(self):
         return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, self.burger_button))) # целимся в выбор кнопки hellow (меню бургер справа)
                                                                       
     # Actions
     def click_cookies_notice_button(self): # кликаем выбор кукис на старте страницы 
-       self.cookies_notice_button().click()
+       self.get_cookies_notice_button().click()
        print("Click get_burger_butto")
 
     def click_burger_button(self): # кликаем выбор кнопки hellow (меню бургер справа)

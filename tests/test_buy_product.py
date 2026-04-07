@@ -28,7 +28,7 @@ from tests.conftest import set_up
 from tests.conftest import set_group
 
 @pytest.mark.order(1)
-def test_buy_product_1(et_group,set_up):
+def test_buy_product_1(set_up):
     driver = webdriver.Firefox()
 
     print("Start Test_1")
@@ -38,7 +38,7 @@ def test_buy_product_1(et_group,set_up):
     login.autorization()
 
     mp = Main_page(driver)
-    # mp.select_cookies_notice_button()
+    mp.select_cookies_notice_button()
     mp.select_burger_button()
 
     ug = User_agreement_page(driver)
@@ -69,31 +69,53 @@ def test_buy_product_1(et_group,set_up):
     f = Finish_page(driver)
     f.finish()
       
-       
-
-    
     # p = Payment_page(driver)
     # p.click_finish_button()
 
     # f = Finish_page(driver)
     # f.finish()
 
-# @pytest.mark.order(2)
-# def test_buy_product_2(set_up,set_group):
-#     driver = webdriver.Firefox()
+@pytest.mark.order(2)
+def test_buy_product_2(set_group):
+    driver = webdriver.Firefox()
 
-#     print("Start Test_2")
-#     print(f"✅ Страница загружена: {driver.title}")
+    print("Start Test_2")
+    print(f"✅ Страница загружена: {driver.title}")
 
-#     login = Login_page(driver)
-#     login.autorization()
+    login = Login_page(driver)
+    login.autorization()
 
-#     mp = Main_page(driver)
-#     mp.select_products_2()
+    mp = Main_page(driver)
+    mp.select_cookies_notice_button()
+    mp.select_burger_button()
 
-#     cp = Cart_page(driver)
-#     cp.click_checkout_button()
-#     # Закрываем браузер
+    ug = User_agreement_page(driver)
+    ug.select_products_button()
+
+    pp = Products_page(driver)
+    pp.select_sony_playstation_games_button()
+    pp.select_sony_playstation_5_games_button()
+    pp.select_sony_playstation_5_new_games_button()
+
+    cp = Category_page(driver)
+    cp.select_click_sort_dropdo_button()
+    # cp.select_item_active_selected()
+    cp.select_data_value_low_to_top_price()
+    cp.select_get_select_product()
+    # cp.select_click_get_cart()
+
+    tcp = To_cart_page(driver)
+    tcp.select_cart_offer_order()
+
+    vp = Viewcart_page(driver)
+    vp.select_checkmark_button()
+    vp.select_order_next_stag()
+
+    cip = Client_information__page(driver)
+    cip.input_information()
+
+    f = Finish_page(driver)
+    f.finish()
 
 # @pytest.mark.order(3)
 # def test_buy_product_3(set_up):
@@ -111,10 +133,12 @@ def test_buy_product_1(et_group,set_up):
 #     cp = Cart_page(driver)
 #     cp.click_checkout_button()
 
+
+    time.sleep(5)
     driver.quit()
     print("✅ Все тесты пройдены успешно!")
 
 if __name__ == "__main__":
-    test_buy_product_1(set_group,set_up)
-    # test_buy_product_2()
+    test_buy_product_1(set_up)
+    test_buy_product_2(set_group)
     # test_buy_product_3()
