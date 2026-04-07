@@ -41,10 +41,10 @@ class Category_page(Base):
     go_to_buy = "//button[@id='js-next-stage']"
 
 
-    actions = ActionChains(driver)
-    slider = driver.find_element(By.XPATH, handle_upper)
+    # actions = ActionChains(driver)
+    # slider = driver.find_element(By.XPATH, handle_upper)
 
-    actions.click_and_hold(slider).move_by_offset(5000, 0).release().perform()
+    # actions.click_and_hold(slider).move_by_offset(5000, 0).release().perform()
   
     # Getters
     def get_sort_dropdo_button(self): # целимся в выбор кнопки критерия цены и порядка по алфовиту 

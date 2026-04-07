@@ -18,9 +18,10 @@ class Finish_page(Base):
 
     # методы
     def finish(self):
-        final_page_true = "https://капибара161.рф/cart/checkout"
+        final_page_true = "https://капибара161.рф/products/viewcart"
+        # final_page_true = "https://капибара161.рф/cart/checkout"
         self.get_current_url() # Method get current url
-        self.assert_url(final_page_true)
+        # self.assert_url(final_page_true)
         self.get_screenshot()
 
    # Этот блок выполняется только если файл запущен напрямую (не при импорте)

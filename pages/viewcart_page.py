@@ -9,6 +9,7 @@ from selenium.webdriver.support import expected_conditions as EC
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from base.base_class import Base
 
+
 """Страница Оформление заказа и класс Viewcart_pag ее курирует"""
 class Viewcart_page(Base):
 
@@ -50,19 +51,19 @@ class Viewcart_page(Base):
        self.get_checkmark_button().click()
        print("Click checkmark_button")
 
-    # def input_user_name(self, user_name):
-    #    self.get_user_name().send_keys(user_name)
-    #    print("input user_name")
+    def click_order_next_stag(self):
+       self.get_order_next_stage().click()
+       print("input user_name")
 
     # def input_user_password(self, password):
     #    self.get_password().send_keys(password)
     #    print("input password")
 
     # методы
-    def autorization(self):
-        self.driver.get(self.url)
-        self.driver.maximize_window()
-        self.get_current_url() # Method get current url
+    # def autorization(self):
+    #     self.driver.get(self.url)
+    #     self.driver.maximize_window()
+    #     self.get_current_url() # Method get current url
         # self.input_user_name("standard_user")
         # self.input_user_password("secret_sauce")
         # self.click_login_button()
@@ -71,6 +72,10 @@ class Viewcart_page(Base):
     def select_checkmark_button(self): # вызываем выбор кнопки каталог товаров Игры Sony Playstation 5 новые игры
         self.get_current_url() # Method get current url
         self.click_checkmark_button()
+
+    def select_order_next_stag(self): # вызываем выбор кнопки каталог товаров Игры Sony Playstation 5 новые игры
+        self.get_current_url() # Method get current url
+        self.click_order_next_stag()
    
 # Этот блок выполняется только если файл запущен напрямую (не при импорте)
 if __name__ == "__main__":

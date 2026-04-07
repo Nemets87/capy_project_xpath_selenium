@@ -1,5 +1,6 @@
 import sys
 import os
+import time
 import pytest
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -14,16 +15,20 @@ from pages.client_information_page import Client_information__page
 from pages.payment_page import Payment_page
 from pages.finish_page import Finish_page
 # from pages.viewcart_page import Login_page
-from pages.cart_page import Cart_page
+# from pages.to_cart_page import Cart_page
 from pages.login_page import Login_page
 from pages.main_page import Main_page # вызов метода главное страницы (страницы загрузки)
 from pages.user_agreement_page import User_agreement_page
 from pages.products_page import Products_page
+from pages.category_page import Category_page
+from pages.to_cart_page import To_cart_page
+from pages.viewcart_page import Viewcart_page
+
 from tests.conftest import set_up
 from tests.conftest import set_group
 
 @pytest.mark.order(1)
-def test_buy_product_1(set_up):
+def test_buy_product_1(et_group,set_up):
     driver = webdriver.Firefox()
 
     print("Start Test_1")
@@ -44,8 +49,28 @@ def test_buy_product_1(set_up):
     pp.select_sony_playstation_5_games_button()
     pp.select_sony_playstation_5_new_games_button()
 
-    # cip = Client_information__page(driver)
-    # cip.input_information()
+    cp = Category_page(driver)
+    cp.select_click_sort_dropdo_button()
+    # cp.select_item_active_selected()
+    cp.select_data_value_top_low_price()
+    cp.select_get_select_product()
+    # cp.select_click_get_cart()
+
+    tcp = To_cart_page(driver)
+    tcp.select_cart_offer_order()
+
+    vp = Viewcart_page(driver)
+    vp.select_checkmark_button()
+    vp.select_order_next_stag()
+
+    cip = Client_information__page(driver)
+    cip.input_information()
+
+    f = Finish_page(driver)
+    f.finish()
+      
+       
+
     
     # p = Payment_page(driver)
     # p.click_finish_button()
@@ -90,6 +115,6 @@ def test_buy_product_1(set_up):
     print("✅ Все тесты пройдены успешно!")
 
 if __name__ == "__main__":
-    test_buy_product_1(set_up)
+    test_buy_product_1(set_group,set_up)
     # test_buy_product_2()
     # test_buy_product_3()

@@ -20,7 +20,7 @@ class Client_information__page(Base):
     name = "//input[@id='name']" # имя
     email = "//input[@id='email']" # мыло 
     phone = "//input[@id='phone']" # телефон
-    check_approval = "//label[@class='inline-block -mg-l-10 -mg-r-10']"  # or //label[@for='field1'] # согласие на обработку данных
+    check_approval =  "//input[@id='field1']" # "//label[@class='inline-block -mg-l-10 -mg-r-10']"  # or //input[@id='field1'] # согласие на обработку данных
     
 
     # Getters
@@ -28,7 +28,7 @@ class Client_information__page(Base):
         return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, self.name)))
     #   забили имя 
     def get_email(self):       
-        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.CSS_SELECTOR, self.email)))
+        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, self.email)))
     #   забили мыло                                                                         
     def get_phone(self):
         return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, self.phone)))
@@ -38,29 +38,29 @@ class Client_information__page(Base):
     # дали согласие на обработку данных
     
     # Actions
-    def name(self, name):
-       self.get_first_name().send_keys(name)
+    def input_name(self, name):
+       self.get_name().send_keys(name)
        print("input name")
 
-    def email(self, email):
-       self.get_last_name().send_keys(email)
+    def input_email(self, email):
+       self.get_email().send_keys(email)
        print("input last_name")
 
-    def phone(self, phone):
+    def input_phone(self, phone):
        self.get_phone().send_keys(phone)
        print("input phone")
 
-    def cget_check_approval(self):
-       self.get_get_check_approval().click()
+    def get_check_approval(self):
+       self.get_check_approval().click()
        print("Click get_check_approval")
 
    # Methods
     def input_information(self):
         self.get_current_url() # Method get current url
         self.input_name("Ivan")
-        self.input_last_name("Fedorov")
-        self.input_zip("344038")
-        self.click_continue_button()
+        self.input_email("bonustime161@yandex.ru")
+        self.input_phone("89614201118")
+        self.get_check_approval()
 ()
    
 # Этот блок выполняется только если файл запущен напрямую (не при импорте)

@@ -10,7 +10,7 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')
 from base.base_class import Base
 
 
-class Cart_page(Base):
+class To_cart_page(Base):
 
     def __init__(self, driver):
         super().__init__(driver)
