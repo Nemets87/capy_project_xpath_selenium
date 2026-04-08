@@ -23,6 +23,7 @@ class Client_information__page(Base):
     check_approval = "//div[@class='checkbox-element dynamic-field-checkbox']" # "//label[@class='inline-block -mg-l-10 -mg-r-10']"  # or //input[@id='field1'] # согласие на обработку данных
     check_save = "//button[@id='js-save-form']"
     check_order = "//button[@id='js-order-stage']"
+    need_number = "//span[@class='js-cart__total']"
 
 
 
@@ -45,6 +46,9 @@ class Client_information__page(Base):
     
     def get_check_order(self):
         return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, self.check_order)))
+
+    def get_need_number(self):
+        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, self.need_number)))
     
     
     # Actions
@@ -74,6 +78,9 @@ class Client_information__page(Base):
        self.get_check_order().click()
        print("Click get_check_order")
 
+    def write_need_number(self):
+        self.get_need_number().text
+        print("write_need_number")
    # Methods
     def input_information(self):
         self.get_current_url() # Method get current url
@@ -84,7 +91,7 @@ class Client_information__page(Base):
         self.click_check_approval()
         self.click_check_save()
         self.click_check_order()
-()
+        self.write_need_number()
    
 # Этот блок выполняется только если файл запущен напрямую (не при импорте)
 if __name__ == "__main__":

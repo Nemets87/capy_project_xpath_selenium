@@ -32,6 +32,7 @@ class Finish_page(Base):
         self.assert_url(final_page_true)
         self.assert_word(self.get_main_word(), 'Спасибо за заказ. Мы свяжемся с Вами в ближайшее время.') # Method assert word
         self.get_screenshot()
+    
 
    # Этот блок выполняется только если файл запущен напрямую (не при импорте)
 if __name__ == "__main__":
