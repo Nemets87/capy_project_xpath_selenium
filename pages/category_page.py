@@ -32,17 +32,20 @@ class Category_page(Base):
     
 
     item_active_selected = "//div[@class='item active selected']"
+
     data_value_top_low_price = "//div[text()='Цена (по убыванию)']" # самая дорогая идет первой //div[text()='Цена (по убыванию)']
     data_value_low_to_top_price = " //div[text()='Цена (по возрастанию)']" # самая дешевая идет первой
+
     data_value_a_z_text = "//div[text()='Наименование (А—Я)']" # А—Я
-    data_value_z_a_text =  "//div[@class='item'][4]" # "//div[text()='Наименование (Я—А)']" # Я-А
+    # "//div[@class='item'][4]" # "//div[text()='Наименование (Я—А)']" 
+    data_value_z_a_text =  "//div[text()='Наименование (Я—А)']" # Я-А
 
     select_product = "//button[@class='button product-item__button button_for_product-card cart-btn js-order-product js-cart-btn']" # отправляем первый продукт в корзину
 
-    
     cart_sender = "//span[@class='cart-btn__text product-item__button-text']" # таргет на товар
     cart = "//span[@class='top-cart__notification top-cart__notification--round-3 quantity-items']" # корзина 
     cart_offer_order = "//a[@class='button button_for_top-cart-drop-down']" # оформить заказ
+
     choise_add = "//span[@class='checkmark']"
     go_to_buy = "//button[@id='js-next-stage']"
 
@@ -124,11 +127,11 @@ class Category_page(Base):
     # Mетоды
     def select_data_value_a_z_text(self): # вызываем выбор кнопки критерия цены и порядка по алфовиту 
         self.get_current_url() # Method get current url
-        self.click_data_value_a_z_text
+        self.click_data_value_a_z_text()
 
     def select_data_value_z_a_text(self): # вызываем выбор кнопки критерия цены и порядка по алфовиту 
         self.get_current_url() # Method get current url
-        self.click_data_value_z_a_text
+        self.click_data_value_z_a_text()
 
 
     def select_click_sort_dropdo_button(self): # вызываем выбор кнопки критерия цены и порядка по алфовиту 
