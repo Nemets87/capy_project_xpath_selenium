@@ -1,115 +1,93 @@
-import sys
-import os
-import time
+import allure
 import pytest
-from selenium import webdriver
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
+from pages.login_page import LoginPage
+from pages.main_page import MainPage
+from pages.user_agreement_page import UserAgreementPage
+from pages.products_page import ProductsPage
+from pages.category_page import CatalogPage
+from pages.to_cart_page import ToCartPage
+from pages.viewcart_page import ViewcartPage
+from pages.client_information_page import ClientInformationPage
+from pages.finish_page import FinishPage
 
 
-# Добавляем корневую папку в пути поиска
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+@allure.feature("Сортировка")
+class TestAlphabet:
 
-from pages.client_information_page import Client_information__page
+    @allure.story("Сортировка А-Я")
+    @pytest.mark.order(3)
+    def test_buy_product_3(self, driver):
+        print("Start Test_3")
+        print(f"✅ Страница загружена: {driver.title}")
 
-from pages.finish_page import Finish_page
+        login = LoginPage(driver)
+        login.autorization()
 
-from pages.login_page import Login_page
-from pages.main_page import Main_page # вызов метода главное страницы (страницы загрузки)
-from pages.user_agreement_page import User_agreement_page
-from pages.products_page import Products_page
-from pages.category_page import Category_page
-from pages.to_cart_page import To_cart_page
-from pages.viewcart_page import Viewcart_page
+        mp = MainPage(driver)
+        mp.select_cookies_notice_button()
+        mp.select_burger_button()
 
-from tests.conftest import set_up
-from tests.conftest import set_group
+        ug = UserAgreementPage(driver)
+        ug.select_products_button()
 
-@pytest.mark.order(3)
-def test_buy_product_3():
-    driver = webdriver.Firefox()
+        pp = ProductsPage(driver)
+        pp.select_sony_playstation_games_button()
+        pp.select_sony_playstation_5_games_button()
+        pp.select_sony_playstation_5_new_games_button()
 
-    print("Start Test_3")
-    print(f"✅ Страница загружена: {driver.title}")
+        cp = CatalogPage(driver)
+        cp.select_click_sort_dropdo_button()
+        cp.select_data_value_a_z_text()
+        cp.select_get_select_product()
 
-    login = Login_page(driver)
-    login.autorization()
+        tcp = ToCartPage(driver)
+        tcp.select_cart_offer_order()
 
-    mp = Main_page(driver)
-    mp.select_cookies_notice_button()
-    mp.select_burger_button()
+        vp = ViewcartPage(driver)
+        vp.select_checkmark_button()
+        vp.select_order_next_stag()
 
-    ug = User_agreement_page(driver)
-    ug.select_products_button()
+        cip = ClientInformationPage(driver)
+        cip.input_information()
 
-    pp = Products_page(driver)
-    pp.select_sony_playstation_games_button()
-    pp.select_sony_playstation_5_games_button()
-    pp.select_sony_playstation_5_new_games_button()
+        f = FinishPage(driver)
+        f.finish()
 
-    cp = Category_page(driver)
-    cp.select_click_sort_dropdo_button()
-    cp.select_data_value_a_z_text()
-    cp.select_get_select_product()
+    @allure.story("Сортировка Я-А")
+    @pytest.mark.order(4)
+    def test_buy_product_4(self, driver):
+        print("Start Test_4")
+        print(f"✅ Страница загружена: {driver.title}")
 
-    tcp = To_cart_page(driver)
-    tcp.select_cart_offer_order()
+        login = LoginPage(driver)
+        login.autorization()
 
-    vp = Viewcart_page(driver)
-    vp.select_checkmark_button()
-    vp.select_order_next_stag()
+        mp = MainPage(driver)
+        mp.select_cookies_notice_button()
+        mp.select_burger_button()
 
-    cip = Client_information__page(driver)
-    cip.input_information()
+        ug = UserAgreementPage(driver)
+        ug.select_products_button()
 
-    f = Finish_page(driver)
-    f.finish()
+        pp = ProductsPage(driver)
+        pp.select_sony_playstation_games_button()
+        pp.select_sony_playstation_5_games_button()
+        pp.select_sony_playstation_5_new_games_button()
 
-@pytest.mark.order(4)
-def test_buy_product_4():
-    driver = webdriver.Firefox()
+        cp = CatalogPage(driver)
+        cp.select_click_sort_dropdo_button()
+        cp.select_data_value_z_a_text()
+        cp.select_get_select_product()
 
-    print("Start Test_4")
-    print(f"✅ Страница загружена: {driver.title}")
+        tcp = ToCartPage(driver)
+        tcp.select_cart_offer_order()
 
-    login = Login_page(driver)
-    login.autorization()
+        vp = ViewcartPage(driver)
+        vp.select_checkmark_button()
+        vp.select_order_next_stag()
 
-    mp = Main_page(driver)
-    mp.select_cookies_notice_button()
-    mp.select_burger_button()
+        cip = ClientInformationPage(driver)
+        cip.input_information()
 
-    ug = User_agreement_page(driver)
-    ug.select_products_button()
-
-    pp = Products_page(driver)
-    pp.select_sony_playstation_games_button()
-    pp.select_sony_playstation_5_games_button()
-    pp.select_sony_playstation_5_new_games_button()
-
-    cp = Category_page(driver)
-    cp.select_click_sort_dropdo_button()
-    cp.select_data_value_z_a_text()
-    cp.select_get_select_product()
-
-    tcp = To_cart_page(driver)
-    tcp.select_cart_offer_order()
-
-    vp = Viewcart_page(driver)
-    vp.select_checkmark_button()
-    vp.select_order_next_stag()
-
-    cip = Client_information__page(driver)
-    cip.input_information()
-
-    f = Finish_page(driver)
-    f.finish()
-
-    time.sleep(5)
-    driver.quit()
-    print("✅ Все тесты пройдены успешно!")
-
-if __name__ == "__main__":
-    test_buy_product_4()
-   
+        f = FinishPage(driver)
+        f.finish()

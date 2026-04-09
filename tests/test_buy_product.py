@@ -1,126 +1,100 @@
-import sys
-import os
-import time
+import allure
 import pytest
-from selenium import webdriver
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
+from pages.login_page import LoginPage
+from pages.main_page import MainPage
+from pages.user_agreement_page import UserAgreementPage
+from pages.products_page import ProductsPage
+from pages.category_page import CatalogPage
+from pages.to_cart_page import ToCartPage
+from pages.viewcart_page import ViewcartPage
+from pages.client_information_page import ClientInformationPage
+from pages.finish_page import FinishPage
 
 
-# Добавляем корневую папку в пути поиска
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+@allure.feature("Покупка товаров")
+class TestBuyProduct:
 
-from pages.client_information_page import Client_information__page
+    @allure.story("Самый дорогой товар")
+    @allure.title("Покупка товара с максимальной ценой")
+    @pytest.mark.order(1)
+    def test_buy_product_1(self, driver, set_up, set_group):
+        print("Start Test_1")
+        print(f"✅ Страница загружена: {driver.title}")
 
-from pages.finish_page import Finish_page
+        login = LoginPage(driver)
+        login.autorization()
 
-from pages.login_page import Login_page
-from pages.main_page import Main_page # вызов метода главное страницы (страницы загрузки)
-from pages.user_agreement_page import User_agreement_page
-from pages.products_page import Products_page
-from pages.category_page import Category_page
-from pages.to_cart_page import To_cart_page
-from pages.viewcart_page import Viewcart_page
+        mp = MainPage(driver)
+        mp.select_cookies_notice_button()
+        mp.select_burger_button()
 
-from tests.conftest import set_up
-from tests.conftest import set_group
+        ug = UserAgreementPage(driver)
+        ug.select_products_button()
 
-@pytest.mark.order(1)
-def test_buy_product_1(set_up,set_group):
-    driver = webdriver.Firefox()
+        pp = ProductsPage(driver)
+        pp.select_sony_playstation_games_button()
+        pp.select_sony_playstation_5_games_button()
+        pp.select_sony_playstation_5_new_games_button()
 
-    print("Start Test_1")
-    print(f"✅ Страница загружена: {driver.title}")
+        cp = CatalogPage(driver)
+        cp.select_click_sort_dropdo_button()
+        cp.select_data_value_top_low_price()   # сортируем по убыванию цены
+        cp.select_get_select_product()         # добавляем первый товар в корзину
+        expected_price = cp.get_first_product_price()   # берём цену этого первого товара
 
-    login = Login_page(driver)
-    login.autorization()
+        tcp = ToCartPage(driver)
+        tcp.select_cart_offer_order()
 
-    mp = Main_page(driver)
-    mp.select_cookies_notice_button()
-    mp.select_burger_button()
+        vp = ViewcartPage(driver)
+        vp.select_checkmark_button()
+        vp.select_order_next_stag()
 
-    ug = User_agreement_page(driver)
-    ug.select_products_button()
+        cip = ClientInformationPage(driver)
+        actual_price = cip.get_need_number_value()   # метод должен вернуть цену
+        cip.input_information()
 
-    pp = Products_page(driver)
-    pp.select_sony_playstation_games_button()
-    pp.select_sony_playstation_5_games_button()
-    pp.select_sony_playstation_5_new_games_button()
+        f = FinishPage(driver)
+        f.finish(expected_price=expected_price, actual_price=actual_price)
 
-    cp = Category_page(driver)
-    cp.select_click_sort_dropdo_button()
-    # cp.select_item_active_selected()
-    cp.select_data_value_top_low_price()
-    cp.select_get_select_product()
-    expected_price = cp.get_upper_price()
-    cp.get_upper()
-    # cp.select_click_get_cart()
 
-    tcp = To_cart_page(driver)
-    tcp.select_cart_offer_order()
+    @allure.story("Самый дешёвый товар")
+    @allure.title("Покупка товара с минимальной ценой")
+    @pytest.mark.order(2)
+    def test_buy_product_2(self, driver, set_up, set_group):
+        print("Start Test_2")
+        print(f"✅ Страница загружена: {driver.title}")
 
-    vp = Viewcart_page(driver)
-    vp.select_checkmark_button()
-    vp.select_order_next_stag()
+        login = LoginPage(driver)
+        login.autorization()
 
-    cip = Client_information__page(driver)
-    cip.input_information()
+        mp = MainPage(driver)
+        mp.select_cookies_notice_button()
+        mp.select_burger_button()
 
-    f = Finish_page(driver)
-    f.finish(expected_price=expected_price)
+        ug = UserAgreementPage(driver)
+        ug.select_products_button()
 
-@pytest.mark.order(2)
-def test_buy_product_2(set_up,set_group):
-    driver = webdriver.Firefox()
+        pp = ProductsPage(driver)
+        pp.select_sony_playstation_games_button()
+        pp.select_sony_playstation_5_games_button()
+        pp.select_sony_playstation_5_new_games_button()
 
-    print("Start Test_2")
-    print(f"✅ Страница загружена: {driver.title}")
+        cp = CatalogPage(driver)
+        cp.select_click_sort_dropdo_button()
+        cp.select_data_value_low_to_top_price()   # сортируем по возрастанию цены
+        cp.select_get_select_product()            # добавляем первый товар в корзину
+        expected_price = cp.get_first_product_price()   
 
-    login = Login_page(driver)
-    login.autorization()
+        tcp = ToCartPage(driver)
+        tcp.select_cart_offer_order()
 
-    mp = Main_page(driver)
-    mp.select_cookies_notice_button()
-    mp.select_burger_button()
+        vp = ViewcartPage(driver)
+        vp.select_checkmark_button()
+        vp.select_order_next_stag()
 
-    ug = User_agreement_page(driver)
-    ug.select_products_button()
-
-    pp = Products_page(driver)
-    pp.select_sony_playstation_games_button()
-    pp.select_sony_playstation_5_games_button()
-    pp.select_sony_playstation_5_new_games_button()
-
-    cp = Category_page(driver)
-    cp.select_click_sort_dropdo_button()
-    # cp.select_item_active_selected()
-    cp.select_data_value_low_to_top_price()
-    cp.select_get_select_product()
-    expected_price = cp.get_lower_price()
-    cp.get_lower()
-    # cp.select_click_get_cart()
-
-    tcp = To_cart_page(driver)
-    tcp.select_cart_offer_order()
-
-    vp = Viewcart_page(driver)
-    vp.select_checkmark_button()
-    vp.select_order_next_stag()
-
-    cip = Client_information__page(driver)
-    cip.input_information()
-
-    f = Finish_page(driver)
-    f.finish(expected_price=expected_price)
-
-    total_filter = cp.get_upper_price() + cp.get_lower_price()
-    print(total_filter)
-    time.sleep(5)
-    driver.quit()
-    print("✅ Все тесты пройдены успешно!")
-
-if __name__ == "__main__":
-    test_buy_product_1(set_up,set_group)
-    test_buy_product_2(set_up,set_group)
-    # test_buy_product_3()
+        cip = ClientInformationPage(driver)
+        actual_price = cip.get_need_number_value()   # метод должен вернуть цену
+        cip.input_information()
+        
+        f = FinishPage(driver)
+        f.finish(expected_price=expected_price, actual_price=actual_price)
