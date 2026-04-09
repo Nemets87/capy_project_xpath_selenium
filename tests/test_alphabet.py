@@ -111,6 +111,5 @@ def test_buy_product_4():
     print("✅ Все тесты пройдены успешно!")
 
 if __name__ == "__main__":
-    # test_buy_product_3()
     test_buy_product_4()
    

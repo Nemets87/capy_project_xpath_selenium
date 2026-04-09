@@ -27,7 +27,7 @@ class Category_page(Base):
     handle_upper = "//div[@class='noUi-handle noUi-handle-upper']" # ползунок
 
     upper = "//input[@name='max_cost']" # максимальная цена 
-    lower = "//input[@name='min_cost']" # ползунок
+    lower = "//input[@name='min_cost']" # минимальная цена
 
     
 
@@ -37,10 +37,9 @@ class Category_page(Base):
     data_value_low_to_top_price = " //div[text()='Цена (по возрастанию)']" # самая дешевая идет первой
 
     data_value_a_z_text = "//div[text()='Наименование (А—Я)']" # А—Я
-    # "//div[@class='item'][4]" # "//div[text()='Наименование (Я—А)']" 
     data_value_z_a_text =  "//div[text()='Наименование (Я—А)']" # Я-А
 
-    select_product = "//button[@class='button product-item__button button_for_product-card cart-btn js-order-product js-cart-btn']" # отправляем первый продукт в корзину
+    select_product = "//button[@class='button product-item__button button_for_product-card cart-btn js-order-product js-cart-btn']" # отправляем продукт в корзину
 
     cart_sender = "//span[@class='cart-btn__text product-item__button-text']" # таргет на товар
     cart = "//span[@class='top-cart__notification top-cart__notification--round-3 quantity-items']" # корзина 
@@ -52,35 +51,35 @@ class Category_page(Base):
 
     # Getters
 
-    def get_data_value_a_z_text(self): # целимся в выбор кнопки критерия цены и порядка по алфовиту 
+    def get_data_value_a_z_text(self): # целимся в выбор кнопки критерия цены и порядка по алфовиту от а до я
         return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, self.data_value_a_z_text))) 
     
-    def get_data_value_z_a_text(self): # целимся в выбор кнопки критерия цены и порядка по алфовиту 
+    def get_data_value_z_a_text(self): # целимся в выбор кнопки критерия цены и порядка по алфовиту от я до а
         return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, self.data_value_z_a_text))) 
 
 
-    def get_sort_dropdo_button(self): # целимся в выбор кнопки критерия цены и порядка по алфовиту 
+    def get_sort_dropdo_button(self): # выбираем меню бургер для выбора нужного критерия товара 
         return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, self.sort_dropdo_button))) 
     
-    def get_item_active_selected(self): # целимся в выбор критерия без сортировки товаров 
+    def get_item_active_selected(self): # целимся в выбор критерия сортировки товаров 
         return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, self.item_active_selected))) 
     
 
     def get_data_value_top_low_price(self): # целимся в выбор критерия где самая дорогая идет первой 
         return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, self.data_value_top_low_price))) 
     
-    def get_upper(self): # целимся в выбор кнопки критерия цены и порядка по алфовиту 
+    def get_upper(self): # целимся в выбор кнопки критерия цены максимальной 
         return WebDriverWait(self.driver, 30).until(EC.presence_of_element_located((By.XPATH, self.upper))) 
     
     
     def get_data_value_low_to_top_price(self): # целимся в выбор критерия где самая дешевая идет первой
         return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, self.data_value_low_to_top_price))) 
     
-    def get_lower(self): # целимся в выбор кнопки критерия цены и порядка по алфовиту 
+    def get_lower(self): # целимся в выбор кнопки критерия цены минимальной
         return WebDriverWait(self.driver, 30).until(EC.presence_of_element_located((By.XPATH, self.lower))) 
     
 
-    def get_select_product(self): # целимся в выбор кнопки и отправляем первый продукт в корзину
+    def get_select_product(self): # целимся в выбор кнопки и отправляем продукт в корзину
         return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, self.select_product))) 
     
     def get_cart(self): # целимся в выбор кнопки и отправляем первый продукт в корзину
@@ -88,11 +87,11 @@ class Category_page(Base):
 
                                                                             
     # Actions
-    def click_data_value_a_z_text(self): # кликаем выбор кнопки критерия цены и порядка по алфовиту 
+    def click_data_value_a_z_text(self): # кликаем выбор кнопки критерия порядка по алфовиту по алфовиту от а до я
        self.get_data_value_a_z_text().click()
        print("Click  data_value_a_z_text")
 
-    def click_data_value_z_a_text(self): # кликаем выбор кнопки критерия цены и порядка по алфовиту 
+    def click_data_value_z_a_text(self): # кликаем выбор кнопки критерия по алфовиту от я до а
        self.get_data_value_z_a_text().click()
        print("Click data_value_z_a_text")
 
@@ -134,33 +133,32 @@ class Category_page(Base):
         self.click_data_value_z_a_text()
 
 
-    def select_click_sort_dropdo_button(self): # вызываем выбор кнопки критерия цены и порядка по алфовиту 
+    def select_click_sort_dropdo_button(self): # выбираем выбор кнопки критерия цены и порядка по алфовиту 
         self.get_current_url() # Method get current url
         self.click_sort_dropdo_button()
 
-    def select_item_active_selected(self): # вызываем выбор кнопки каталог товаров Игры Sony Playstation 5 
+    def select_item_active_selected(self): # 
         self.get_current_url() # Method get current url
         self.click_item_active_selected()
 
 
-    def select_data_value_top_low_price(self): # вызываем выбор кнопки каталог товаров Игры Sony Playstation 5 новые игры
+    def select_data_value_top_low_price(self): # выбираем самый дорогой товар
         self.get_current_url() # Method get current url
         self.click_data_value_top_low_price()
 
     
-    def select_data_value_low_to_top_price(self): # вызываем выбор кнопки каталог товаров Игры Sony Playstation 5 новые игры
+    def select_data_value_low_to_top_price(self): # выбираем самый доступный товар
         self.get_current_url() # Method get current url
         self.click_data_value_low_to_top_price()
 
 
-    def select_get_select_product(self): # вызываем выбор кнопки каталог товаров Игры Sony Playstation 5 новые игры
+    def select_get_select_product(self): # выбираем товар
         self.get_current_url() # Method get current url
         self.click_get_select_product()
 
-    def select_click_get_cart(self): # вызываем выбор кнопки каталог товаров Игры Sony Playstation 5 новые игры
+    def select_click_get_cart(self): # кликаем корзину
         self.get_current_url() # Method get current url
         self.click_get_cart()
-
 
     def value_upper(self):
         self.get_upper().text()

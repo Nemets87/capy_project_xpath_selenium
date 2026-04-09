@@ -24,7 +24,6 @@ class Viewcart_page(Base):
     # Getters
     def get_checkmark_button(self):
         return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, self.checkmark)))
-    #   забили имя 
 
     def get_order_next_stage(self):       
         return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, self.order_next_stage)))
@@ -38,11 +37,11 @@ class Viewcart_page(Base):
        self.get_order_next_stage().click()
        print("input user_name")
 
-    def select_checkmark_button(self): # вызываем выбор кнопки каталог товаров Игры Sony Playstation 5 новые игры
+    def select_checkmark_button(self): # 
         self.get_current_url() # Method get current url
         self.click_checkmark_button()
 
-    def select_order_next_stag(self): # вызываем выбор кнопки каталог товаров Игры Sony Playstation 5 новые игры
+    def select_order_next_stag(self): # 
         self.get_current_url() # Method get current url
         self.click_order_next_stag()
    

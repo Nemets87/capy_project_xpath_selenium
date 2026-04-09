@@ -20,10 +20,10 @@ class Client_information__page(Base):
     name = "//input[@id='name']" # имя
     email = "//input[@id='email']" # мыло 
     phone = "//input[@id='phone']" # телефон
-    check_approval = "//div[@class='checkbox-element dynamic-field-checkbox']" # "//label[@class='inline-block -mg-l-10 -mg-r-10']"  # or //input[@id='field1'] # согласие на обработку данных
-    check_save = "//button[@id='js-save-form']"
-    check_order = "//button[@id='js-order-stage']"
-    need_number = "//span[@class='js-cart__total']"
+    check_approval = "//div[@class='checkbox-element dynamic-field-checkbox']" # согласие на обработку данных
+    check_save = "//button[@id='js-save-form']" # сохранили данные
+    check_order = "//button[@id='js-order-stage']" # оформили заказ
+    need_number = "//span[@class='js-cart__total']" # локатор финальной цены
 
 
 

@@ -17,12 +17,7 @@ class To_cart_page(Base):
         self.driver = driver
 
     # Locators 
-
-    # cart_sender = "//span[@class='cart-btn__text product-item__button-text']" # таргет на товар
-    # cart = "//span[@class='top-cart__notification top-cart__notification--round-3 quantity-items']" # корзина 
     cart_offer_order = "//a[@class='button button_for_top-cart-drop-down']" # оформить заказ
-    # choise_add = "//span[@class='checkmark']"
-    # go_to_buy = "//button[@id='js-next-stage']"
 
     # Getters
     def get_cart_offer_ordert(self):
