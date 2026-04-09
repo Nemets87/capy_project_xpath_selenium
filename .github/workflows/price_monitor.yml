@@ -2,9 +2,8 @@ name: Price Monitor
 
 on:
   schedule:
-    # Запуск каждый час (минута 5)
-    - cron: '5 * * * *'
-  workflow_dispatch:  # чтобы можно было запустить вручную
+    - cron: '*/30 * * * *'   # каждые 30 минут
+  workflow_dispatch:
 
 jobs:
   check_price:
@@ -22,10 +21,4 @@ jobs:
         run: pip install requests beautifulsoup4
 
       - name: Run price parser
-        run: python test_parser_ps5_slim.py
-
-      - name: Save price cache (optional)
-        uses: actions/upload-artifact@v4
-        with:
-          name: price_cache
-          path: price_cache.txt
+        run: python tests/test_parser_ps5_slim.py   # путь к файлу внутри папки tests
