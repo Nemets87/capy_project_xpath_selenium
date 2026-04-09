@@ -1,0 +1,44 @@
+
+-----
+Test: tests/test_buy_product.py::test_buy_product_1 (setup)
+Start time: 2026-04-09 09:32:36.908083
+Start name method: test_buy_product_1
+
+End time: 2026-04-09 09:32:47.966289
+End name method: test_buy_product_1
+URL: 
+
+-----
+
+-----
+Test: tests/test_buy_product.py::test_buy_product_2 (setup)
+Start time: 2026-04-09 09:32:47.966979
+Start name method: test_buy_product_2
+
+End time: 2026-04-09 09:32:58.059746
+End name method: test_buy_product_2
+URL: 
+
+-----
+
+-----
+Test: tests/test_alphabet.py::test_buy_product_3 (setup)
+Start time: 2026-04-09 09:32:58.060583
+Start name method: test_buy_product_3
+
+End time: 2026-04-09 09:33:08.459111
+End name method: test_buy_product_3
+URL: 
+
+-----
+
+-----
+Test: tests/test_alphabet.py::test_buy_product_4 (setup)
+Start time: 2026-04-09 09:33:08.460119
+Start name method: test_buy_product_4
+
+End time: 2026-04-09 09:33:18.507421
+End name method: test_buy_product_4
+URL: 
+
+-----

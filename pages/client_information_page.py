@@ -1,13 +1,15 @@
 import time
 import sys
 import os
-from faker import Faker
+from faker import Faker         
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from base.base_class import Base
+
+fake = Faker('ru_RU') 
 
 
 class Client_information__page(Base):
@@ -24,6 +26,8 @@ class Client_information__page(Base):
     check_save = "//button[@id='js-save-form']" # сохранили данные
     check_order = "//button[@id='js-order-stage']" # оформили заказ
     need_number = "//span[@class='js-cart__total']" # локатор финальной цены
+
+    fake = Faker('ru_RU')  # русскоязычные данные
 
 
 
@@ -78,20 +82,40 @@ class Client_information__page(Base):
        self.get_check_order().click()
        print("Click get_check_order")
 
-    def write_need_number(self):
-        self.get_need_number().text
-        print("write_need_number")
-   # Methods
+    def get_need_number_value(self) -> float:
+        element = self.get_need_number()
+        return Base.clean_price_element(element)
+
+        
+    # Methods
+
     def input_information(self):
-        self.get_current_url() # Method get current url
-        print(self.get_current_url)
-        self.input_name("Ivan")
-        self.input_email("bonustime161@yandex.ru")
-        self.input_phone("89614201118")
+        self.get_current_url()
+       
+        # Генерируем случайные имя, email, телефон
+        random_name = fake.first_name()
+        random_email = fake.email()
+        random_phone = fake.phone_number()
+        random_phone = fake.msisdn()[:11] # или другой генератор коли сайт проверяет формат телефона, можно задать маску:
+        
+        self.input_name(random_name)
+        self.input_email(random_email)
+        self.input_phone(random_phone)
         self.click_check_approval()
         self.click_check_save()
         self.click_check_order()
         self.write_need_number()
+
+    # def input_information(self):
+    #     self.get_current_url() # Method get current url
+    #     print(self.get_current_url)
+    #     self.input_name("Ivan")
+    #     self.input_email("bonustime161@yandex.ru")
+    #     self.input_phone("89614201118")
+    #     self.click_check_approval()
+    #     self.click_check_save()
+    #     self.click_check_order()
+    #     self.write_need_number()
    
 # Этот блок выполняется только если файл запущен напрямую (не при импорте)
 if __name__ == "__main__":

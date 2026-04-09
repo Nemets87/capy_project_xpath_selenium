@@ -68,15 +68,15 @@ class Category_page(Base):
     def get_data_value_top_low_price(self): # целимся в выбор критерия где самая дорогая идет первой 
         return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, self.data_value_top_low_price))) 
     
-    def get_upper(self): # целимся в выбор кнопки критерия цены максимальной 
-        return WebDriverWait(self.driver, 30).until(EC.presence_of_element_located((By.XPATH, self.upper))) 
+    def get_upper(self):
+        return WebDriverWait(self.driver, 30).until(EC.presence_of_element_located((By.XPATH, self.upper)))
     
     
     def get_data_value_low_to_top_price(self): # целимся в выбор критерия где самая дешевая идет первой
         return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, self.data_value_low_to_top_price))) 
     
-    def get_lower(self): # целимся в выбор кнопки критерия цены минимальной
-        return WebDriverWait(self.driver, 30).until(EC.presence_of_element_located((By.XPATH, self.lower))) 
+    def get_lower(self):
+        return WebDriverWait(self.driver, 30).until(EC.presence_of_element_located((By.XPATH, self.lower)))
     
 
     def get_select_product(self): # целимся в выбор кнопки и отправляем продукт в корзину
@@ -165,6 +165,26 @@ class Category_page(Base):
 
     def value_lower(self):
         self.get_lower().text()
+
+    def get_upper_price(self) -> float:
+        """Возвращает числовое значение максимальной цены из поля max_cost"""
+        element = self.get_upper()
+        return Base.clean_price_element(element)
+
+    def get_lower_price(self) -> float:
+        """Возвращает числовое значение минимальной цены из поля min_cost"""
+        element = self.get_lower()
+        return Base.clean_price_element(element)
+    
+    def get_upper_price(self) -> float:
+        element = self.get_upper()
+        value_str = element.get_attribute("value")  # у input value, а не text
+        return self.extract_float(value_str)   # используем статический метод
+    
+    def get_lower_price(self) -> float:
+        element = self.get_lower()
+        value_str = element.get_attribute("value")  # у input value, а не text
+        return self.extract_float(value_str)   # используем статический метод
 
 
     # Этот блок выполняется только если файл запущен напрямую (не при импорте)

@@ -53,6 +53,7 @@ def test_buy_product_1(set_up,set_group):
     # cp.select_item_active_selected()
     cp.select_data_value_top_low_price()
     cp.select_get_select_product()
+    expected_price = cp.get_upper_price()
     cp.get_upper()
     # cp.select_click_get_cart()
 
@@ -67,7 +68,7 @@ def test_buy_product_1(set_up,set_group):
     cip.input_information()
 
     f = Finish_page(driver)
-    f.finish()
+    f.finish(expected_price=expected_price)
 
 @pytest.mark.order(2)
 def test_buy_product_2(set_up,set_group):
@@ -96,6 +97,7 @@ def test_buy_product_2(set_up,set_group):
     # cp.select_item_active_selected()
     cp.select_data_value_low_to_top_price()
     cp.select_get_select_product()
+    expected_price = cp.get_lower_price()
     cp.get_lower()
     # cp.select_click_get_cart()
 
@@ -110,8 +112,10 @@ def test_buy_product_2(set_up,set_group):
     cip.input_information()
 
     f = Finish_page(driver)
-    f.finish()
+    f.finish(expected_price=expected_price)
 
+    total_filter = cp.get_upper_price() + cp.get_lower_price()
+    print(total_filter)
     time.sleep(5)
     driver.quit()
     print("✅ Все тесты пройдены успешно!")

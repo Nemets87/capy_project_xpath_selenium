@@ -26,13 +26,26 @@ class Finish_page(Base):
  
 
     # методы
-    def finish(self):
+
+    
+    def get_final_price(self) -> float:
+        # Локатор финальной цены (можно перенести из Client_information_page)
+        need_number_locator = "//span[@class='js-cart__total']"
+        element = WebDriverWait(self.driver, 30).until(EC.presence_of_element_located((By.XPATH, need_number_locator)))
+        return Base.clean_price_element(element)
+    
+    def finish(self, expected_price: float = None):
         final_page_true = "https://xn--161-5cdaaf9cq5co.xn--p1ai/products/viewcart"
         self.get_current_url() # Method get current url
         self.assert_url(final_page_true)
         self.assert_word(self.get_main_word(), 'Спасибо за заказ. Мы свяжемся с Вами в ближайшее время.') # Method assert word
         self.get_screenshot()
-    
+        
+        if expected_price is not None:
+            actual_price = self.get_final_price()
+            self.assert_price_match(expected_price, actual_price)
+            print(f"✅ Цена в корзине {actual_price} соответствует ожидаемой {expected_price}")
+            self.get_screenshot()
 
    # Этот блок выполняется только если файл запущен напрямую (не при импорте)
 if __name__ == "__main__":
