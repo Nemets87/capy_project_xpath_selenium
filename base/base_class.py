@@ -66,9 +66,10 @@ class Base:
                       attachment_type=AttachmentType.PNG)
 
     # ---------- Методы проверок (assert) ----------
-    def assert_url(self, expected_url):
+    def assert_url(self, expected_substring: str):
+        """Проверяет, что текущий URL содержит ожидаемую подстроку (например, '/viewcart' или '/checkout')"""
         actual = self.driver.current_url
-        assert actual == expected_url, f"URL не совпадает: {actual} != {expected_url}"
+        assert expected_substring in actual, f"URL не содержит '{expected_substring}': {actual}"
 
     def assert_word(self, element, expected_text):
         actual = element.text

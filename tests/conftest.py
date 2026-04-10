@@ -1,48 +1,45 @@
 import pytest
+import pytest
 import allure
 from selenium import webdriver
 from selenium.webdriver.firefox.service import Service
-from webdriver_manager.firefox import GeckoDriverManager
 from allure_commons.types import AttachmentType
-
-
-# @pytest.fixture(autouse=True)
-# def log_test_name(request):
-#     """Автоматически логирует начало и конец каждого теста"""
-#     test_name = request.node.name
-#     Logger.add_start_step(test_name)
-#     yield
-#     Logger.add_end_step(url="", method=test_name)  # URL можно получать из драйвера
-
+import os
 
 @pytest.fixture(scope="function")
 def driver():
     """Фикстура для создания и закрытия драйвера"""
-    driver = webdriver.Firefox(service=Service(GeckoDriverManager().install()))
+    # В GitHub Actions geckodriver уже в PATH, можно просто вызвать webdriver.Firefox()
+    # Для локальной разработки можно использовать webdriver-manager, но чтобы не было rate limit,
+    # лучше один раз установить geckodriver вручную и прописать путь.
+    
+    # Пытаемся найти geckodriver в стандартных местах
+    geckodriver_path = None
+    if os.path.exists("/usr/local/bin/geckodriver"):  # GitHub Actions
+        geckodriver_path = "/usr/local/bin/geckodriver"
+    elif os.path.exists("/usr/bin/geckodriver"):
+        geckodriver_path = "/usr/bin/geckodriver"
+    else:
+        # Если не нашли, пробуем через webdriver-manager (но может быть rate limit)
+        try:
+            from webdriver_manager.firefox import GeckoDriverManager
+            geckodriver_path = GeckoDriverManager().install()
+        except:
+            pass
+    
+    if geckodriver_path:
+        service = Service(geckodriver_path)
+        driver = webdriver.Firefox(service=service)
+    else:
+        # Надеемся, что geckodriver просто в PATH
+        driver = webdriver.Firefox()
+    
     driver.maximize_window()
     yield driver
     driver.quit()
 
-
-@pytest.fixture(scope="function")
-def set_up():
-    """Фикстура для начала теста (совместимость со старыми тестами)"""
-    print("\n✅ Start test setup")
-    yield
-    print("\n✅ Test teardown")
-
-
-@pytest.fixture(scope="module")
-def set_group():
-    """Фикстура для группы тестов"""
-    print("\n✅ Enter system")
-    yield
-    print("\n✅ Exit system")
-
-
 @pytest.hookimpl(tryfirst=True, hookwrapper=True)
 def pytest_runtest_makereport(item, call):
-    """Хук для добавления скриншота при падении теста"""
     outcome = yield
     rep = outcome.get_result()
     if rep.when == "call" and rep.failed:

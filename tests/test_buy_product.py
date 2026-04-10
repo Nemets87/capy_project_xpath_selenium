@@ -17,7 +17,7 @@ class TestBuyProduct:
     @allure.story("Самый дорогой товар")
     @allure.title("Покупка товара с максимальной ценой")
     @pytest.mark.order(1)
-    def test_buy_product_1(self, driver, set_up, set_group):
+    def test_buy_product_1(self, driver):
         print("Start Test_1")
         print(f"✅ Страница загружена: {driver.title}")
 
@@ -60,7 +60,7 @@ class TestBuyProduct:
     @allure.story("Самый дешёвый товар")
     @allure.title("Покупка товара с минимальной ценой")
     @pytest.mark.order(2)
-    def test_buy_product_2(self, driver, set_up, set_group):
+    def test_buy_product_2(self, driver):
         print("Start Test_2")
         print(f"✅ Страница загружена: {driver.title}")
 
