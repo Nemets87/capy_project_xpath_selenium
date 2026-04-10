@@ -1,24 +1,35 @@
-name: Price Monitor
+name: Run tests and publish Allure report
 
 on:
+  push:
+    branches: [ main ]
   schedule:
-    - cron: '*/30 * * * *'   # каждые 30 минут
+    - cron: '0 * * * *'  # каждый час
   workflow_dispatch:
 
 jobs:
-  check_price:
+  test:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
+      - uses: actions/checkout@v4
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-
       - name: Install dependencies
-        run: pip install requests beautifulsoup4
-
-      - name: Run price parser
-        run: python tests/test_parser_ps5_slim.py   # путь к файлу внутри папки tests
+        run: pip install -r requirements.txt
+      - name: Run pytest with Allure
+        run: pytest tests/ --alluredir=allure-results
+      - name: Install Allure
+        run: |
+          sudo apt-add-repository ppa:qameta/allure -y
+          sudo apt-get update
+          sudo apt-get install allure
+      - name: Generate Allure report
+        run: allure generate allure-results -o allure-report --clean
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./allure-report
+          publish_branch: gh-pages
