@@ -1,10 +1,12 @@
-name: Run tests and publish Allure report
+name: Run tests
 
-on: 
+on:
   push:
     branches: [ main ]
+  pull_request:
+    branches: [ main ]
   schedule:
-    - cron: '0 * * * *'  # каждый час
+    - cron: '0 * * * *'   # каждый час (опционально)
   workflow_dispatch:
 
 jobs:
@@ -17,7 +19,9 @@ jobs:
         with:
           python-version: '3.12'
       - name: Install dependencies
-        run: pip install -r requirements.txt
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
       - name: Run pytest with Allure
         run: pytest tests/ --alluredir=allure-results
       - name: Install Allure
@@ -27,9 +31,8 @@ jobs:
           sudo apt-get install allure
       - name: Generate Allure report
         run: allure generate allure-results -o allure-report --clean
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
+      - name: Upload Allure report artifact
+        uses: actions/upload-artifact@v4
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./allure-report
-          publish_branch: gh-pages
+          name: allure-report
+          path: allure-report
