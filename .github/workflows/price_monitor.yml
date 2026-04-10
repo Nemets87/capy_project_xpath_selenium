@@ -5,10 +5,7 @@ on:
     branches: [ main ]
   pull_request:
     branches: [ main ]
-  schedule:
-    # Запуск каждый день в 6:00 UTC (можно изменить)
-    - cron: '0 6 * * *'
-  workflow_dispatch:      # позволяет запускать вручную
+  workflow_dispatch:
 
 jobs:
   test:
@@ -16,8 +13,7 @@ jobs:
     timeout-minutes: 20
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -30,22 +26,10 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Install Firefox (latest)
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y firefox
-      
-      - name: Install geckodriver (latest)
-        run: |
-          GECKO_VERSION=$(curl -s https://api.github.com/repos/mozilla/geckodriver/releases/latest | jq -r .tag_name)
-          wget https://github.com/mozilla/geckodriver/releases/download/${GECKO_VERSION}/geckodriver-${GECKO_VERSION}-linux64.tar.gz
-          tar -xzf geckodriver-${GECKO_VERSION}-linux64.tar.gz
-          sudo mv geckodriver /usr/local/bin/
-          geckodriver --version
-
+      # Chrome уже установлен, драйвер подхватится автоматически
       - name: Install Allure (latest)
         run: |
-          ALLURE_VERSION="2.32.0"   # проверьте актуальную на https://github.com/allure-framework/allure2/releases
+          ALLURE_VERSION="2.32.0"
           wget https://github.com/allure-framework/allure2/releases/download/${ALLURE_VERSION}/allure-${ALLURE_VERSION}.tgz -O /tmp/allure.tgz
           sudo tar -xzf /tmp/allure.tgz -C /opt/
           sudo ln -s /opt/allure-${ALLURE_VERSION}/bin/allure /usr/local/bin/allure
@@ -57,23 +41,8 @@ jobs:
       - name: Generate Allure report
         run: allure generate allure-results -o allure-report --clean
 
-      - name: Upload Allure results as artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: allure-results
-          path: allure-results
-
       - name: Upload Allure report as artifact
         uses: actions/upload-artifact@v4
         with:
           name: allure-report
           path: allure-report
-
-      # Опционально: публикация отчёта на GitHub Pages
-      - name: Deploy Allure report to GitHub Pages
-        if: github.ref == 'refs/heads/main'
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./allure-report
-          publish_branch: gh-pages
