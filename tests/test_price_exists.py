@@ -9,7 +9,7 @@ from base.base_class import Base
 class PriceCheckPage(Base):
     # Локатор цены товара (тот же, что использовали ранее)
     PRICE_LOCATOR = (By.XPATH, "//div[@class='product-item-price']")  # если на странице каталога
-    # Для конкретной карточки товара локатор может быть другим. Например:
+    # Для конкретной карточки товара локатор может быть другим. Например Аля:
     # SINGLE_PRICE_LOCATOR = (By.XPATH, "//span[@class='product-price-data']")
 
     def check_price_exists(self, url: str):

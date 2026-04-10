@@ -14,7 +14,13 @@ def driver():
     options.add_argument("--no-sandbox")
     options.add_argument("--disable-dev-shm-usage")
     options.add_argument("--disable-gpu")
+    options.add_argument("--disable-software-rasterizer")
     options.add_argument("--window-size=1920,1080")
+    options.set_preference("browser.download.folderList", 2)
+    options.set_preference("browser.download.manager.showWhenStarting", False)
+    options.set_preference("browser.download.useDownloadDir", True)
+    options.set_preference("browser.download.dir", "/tmp")
+    options.set_preference("pdfjs.disabled", True)
     
     geckodriver_path = None
     if os.path.exists("/usr/local/bin/geckodriver"):
@@ -48,7 +54,6 @@ def pytest_runtest_makereport(item, call):
             allure.attach(driver.get_screenshot_as_png(),
                           name="screenshot_on_failure",
                           attachment_type=AttachmentType.PNG)
-
 
 
 # import pytest
