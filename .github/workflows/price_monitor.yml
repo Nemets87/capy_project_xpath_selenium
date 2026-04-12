@@ -26,22 +26,6 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      # Chrome уже установлен, драйвер подхватится автоматически
-
-      - name: Install Firefox
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y firefox
-          firefox --version
-      
-      - name: Install geckodriver
-        run: |
-          wget https://github.com/mozilla/geckodriver/releases/download/v0.35.0/geckodriver-v0.35.0-linux64.tar.gz
-          tar -xzf geckodriver-v0.35.0-linux64.tar.gz
-          sudo mv geckodriver /usr/local/bin/
-          geckodriver --version
-
-      
       - name: Install Allure (latest)
         run: |
           ALLURE_VERSION="2.32.0"
@@ -51,6 +35,8 @@ jobs:
           allure --version
 
       - name: Run pytest with Allure
+        env:
+          BROWSER: chrome
         run: pytest tests/ --alluredir=allure-results
 
       - name: Generate Allure report
