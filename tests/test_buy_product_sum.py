@@ -1,5 +1,6 @@
 import allure
 import pytest
+import time
 from pages.login_page import LoginPage
 from pages.main_page import MainPage
 from pages.user_agreement_page import UserAgreementPage
@@ -9,6 +10,11 @@ from pages.to_cart_page import ToCartPage
 from pages.viewcart_page import ViewcartPage
 from pages.client_information_page import ClientInformationPage
 from pages.finish_page import FinishPage
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.by import By
+
+
 
 
 @allure.feature("Покупка нескольких товаров")
@@ -45,9 +51,10 @@ class TestBuyProductSum:
         # 3. Вернуться в каталог (нажать на логотип или кнопку "Назад")
         # Проще всего перезагрузить страницу каталога, но можно кликнуть по логотипу.
         # Для простоты: снова открыть нужную категорию (но чтобы не усложнять, используем прямой переход)
-        driver.get("https://капибара161.рф/products/category/5382072")  # или использовать метод open
+        driver.get("https://капибара161.рф/products/category/5382072")
+        WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, "//div[@class='sort ui dropdown small-12 selection']"))) 
         # Небольшая пауза для загрузки
-        import time
+       
         time.sleep(1)
 
         # 4. Добавить самый дешёвый товар

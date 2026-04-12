@@ -10,24 +10,20 @@ class ViewcartPage(Base):
     checkmark = (By.XPATH, "//span[@class='checkmark']")
     order_next_stage = (By.XPATH, "//button[@id='js-next-stage']")
 
-    def get_checkmark_button(self):
-        return self.wait.until(EC.element_to_be_clickable(self.checkmark))
-
-    def get_order_next_stage(self):
-        return self.wait.until(EC.element_to_be_clickable(self.order_next_stage))
-
     def click_checkmark_button(self):
-        self.get_checkmark_button().click()
+        # Используем базовый click с защитой
+        self.click(self.checkmark)
         print("✅ Выбран способ оплаты")
 
     def click_order_next_stage(self):
-        self.get_order_next_stage().click()
+        self.click(self.order_next_stage)
         print("✅ Переход к оформлению")
 
+    # Методы для тестов
     def select_checkmark_button(self):
         self.get_current_url()
         self.click_checkmark_button()
 
-    def select_order_next_stag(self):   # сохранено для совместимости
+    def select_order_next_stag(self):
         self.get_current_url()
         self.click_order_next_stage()

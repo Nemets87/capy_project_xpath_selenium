@@ -1,0 +1,23 @@
+
+-----
+Test: tests/test_price_exists.py::TestPriceExists::test_price_exists_for_single_product (call)
+Start time: 2026-04-10 13:22:28.934689
+Start URL: https://капибара161.рф/products/category/5458999
+
+
+-----
+Test: tests/test_price_exists.py::TestPriceExists::test_price_exists_on_category_page (call)
+Start time: 2026-04-10 13:22:29.407471
+Start URL: https://капибара161.рф/products/category/5382072
+
+
+-----
+Test: tests/test_buy_all_products.py::TestBuyAllProducts::test_add_all_products_to_cart (call)
+Start time: 2026-04-10 13:22:30.058545
+Start URL: https://капибара161.рф/products/category/5382072
+
+End time: 2026-04-10 13:22:39.611609
+End name method: click
+URL: https://xn--161-5cdaaf9cq5co.xn--p1ai/products/viewcart
+
+-----
