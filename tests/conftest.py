@@ -2,36 +2,41 @@ import pytest
 import allure
 import os
 from selenium import webdriver
-from selenium.webdriver.chrome.options import Options as ChromeOptions
-from selenium.webdriver.firefox.options import Options as FirefoxOptions
+from selenium.webdriver.firefox.options import Options
+from selenium.webdriver.firefox.service import Service
 from allure_commons.types import AttachmentType
 
 @pytest.fixture(scope="function")
 def driver():
-    browser = os.environ.get('BROWSER', 'firefox').lower()  # по умолчанию Firefox
+    options = Options()
     
-    if browser == 'chrome':
-        options = ChromeOptions()
-        if os.environ.get('CI'):
-            options.add_argument("--headless=new")
-            options.add_argument("--no-sandbox")
-            options.add_argument("--disable-dev-shm-usage")
+    # Определяем, запущены ли мы в CI (GitHub Actions)
+    if os.environ.get('CI'):
+        options.add_argument("--headless")
+        options.add_argument("--no-sandbox")
+        options.add_argument("--disable-dev-shm-usage")
         options.add_argument("--window-size=1920,1080")
-        options.add_experimental_option("excludeSwitches", ["enable-automation"])
-        driver = webdriver.Chrome(options=options)
-    else:  # firefox
-        options = FirefoxOptions()
-        if os.environ.get('CI'):
-            # Для Firefox в CI нужны дополнительные настройки
-            options.add_argument("--headless")
-            options.add_argument("--window-size=1920,1080")
-            options.set_preference("browser.download.folderList", 2)
-            options.set_preference("browser.download.manager.showWhenStarting", False)
-            options.set_preference("browser.download.useDownloadDir", True)
-            options.set_preference("browser.download.dir", "/tmp")
-            options.set_preference("pdfjs.disabled", True)
-            options.set_preference("media.volume_scale", "0.0")
-            options.set_preference("dom.webnotifications.enabled", False)
+        # Критические настройки для Firefox в headless-режиме
+        options.set_preference("browser.download.folderList", 2)
+        options.set_preference("browser.download.manager.showWhenStarting", False)
+        options.set_preference("browser.download.useDownloadDir", True)
+        options.set_preference("browser.download.dir", "/tmp")
+        options.set_preference("pdfjs.disabled", True)
+        options.set_preference("media.volume_scale", "0.0")
+        options.set_preference("dom.webnotifications.enabled", False)
+        # Ускоряем загрузку
+        options.set_preference("browser.startup.page", 0)
+        options.set_preference("browser.offline", True)
+    else:
+        # Локально можно без headless, но для единообразия оставим как есть
+        pass
+    
+    # Путь к geckodriver (в GitHub Actions он будет в /usr/local/bin)
+    geckodriver_path = "/usr/local/bin/geckodriver" if os.environ.get('CI') else None
+    if geckodriver_path and os.path.exists(geckodriver_path):
+        service = Service(geckodriver_path)
+        driver = webdriver.Firefox(service=service, options=options)
+    else:
         driver = webdriver.Firefox(options=options)
     
     driver.maximize_window()
