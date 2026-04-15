@@ -12,8 +12,6 @@ from pages.client_information_page import ClientInformationPage
 from pages.finish_page import FinishPage
 
 
-
-
 @allure.feature("Покупка товаров +-")
 class TestBuyProduct:
 

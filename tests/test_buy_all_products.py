@@ -19,4 +19,3 @@ class TestBuyAllProducts:
         catalog_page.add_all_products_to_cart()
         cart_page = catalog_page.go_to_cart()
         cart_page.take_screenshot("cart_with_all_products")
-
