@@ -11,14 +11,14 @@ from pages.client_information_page import ClientInformationPage
 from pages.finish_page import FinishPage
 
 
-@allure.feature("Покупка товаров")
+@allure.feature("Покупка товаров полный цикл позитив самый дорогой товарчик")
 class TestBuyProduct:
 
     @allure.story("Самый дорогой товар")
     @allure.title("Покупка товара с максимальной ценой")
-    @pytest.mark.order(1)
+    @pytest.mark.order(6)
     def test_buy_product_1(self, driver):
-        print("Start Test_1")
+        print("Start Test_6")
         print(f"✅ Страница загружена: {driver.title}")
 
         login = LoginPage(driver)
@@ -58,10 +58,10 @@ class TestBuyProduct:
 
 
     @allure.story("Самый дешёвый товар")
-    @allure.title("Покупка товара с минимальной ценой")
-    @pytest.mark.order(2)
+    @allure.title("Покупка товаров полный цикл позитив самый доступный товарчик")
+    @pytest.mark.order(7)
     def test_buy_product_2(self, driver):
-        print("Start Test_2")
+        print("Start Test_7")
         print(f"✅ Страница загружена: {driver.title}")
 
         login = LoginPage(driver)
