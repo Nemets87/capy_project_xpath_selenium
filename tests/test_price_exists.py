@@ -27,6 +27,7 @@ class PriceCheckPage(Base):
 
 
 @allure.feature("Мониторинг наличия товара и корзины")
+@pytest.mark.order(10)
 class TestPriceExists:
 
     @allure.title("Цена товара присутствует (товар в наличии)")
