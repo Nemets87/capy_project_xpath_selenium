@@ -14,13 +14,13 @@ from pages.finish_page import FinishPage
 
 
 
-@allure.feature("Покупка товаров")
+@allure.feature("Покупка товаров +-")
 class TestBuyProduct:
 
-    @allure.story("Самый дорогой товар")
-    @allure.title("Покупка товара с максимальной ценой")
+    @allure.story("Покупаем на кол-во с плюсом")
+    @allure.title("Покупка товара сперва проверяем + потом -")
     @pytest.mark.order(1)
-    def test_buy_product_1(self, driver):
+    def test_buy_product_plus_minus(self, driver):
         print("Start Test_1")
         print(f"✅ Страница загружена: {driver.title}")
 
@@ -54,6 +54,56 @@ class TestBuyProduct:
         tcp.double_click_minus()
         tcp.double_click_minus()
         tcp.double_click_minus()
+        time.sleep(3)
+     
+        tcp.select_cart_offer_order()
+       
+        vp = ViewcartPage(driver)
+        vp.select_checkmark_button()
+        vp.select_order_next_stag()
+
+        cip = ClientInformationPage(driver)
+        actual_price = cip.get_need_number_value()   # метод должен вернуть цену
+        cip.input_information()
+
+        f = FinishPage(driver)
+        f.finish(expected_price=expected_price, actual_price=actual_price)
+
+
+    @allure.story("Покупаем на кол-во с минус")
+    @allure.title("Покупка товара сперва проверяем - потом +")
+    @pytest.mark.order(1)
+    def test_buy_product_plus_minus(self, driver):
+        print("Start Test_1")
+        print(f"✅ Страница загружена: {driver.title}")
+
+        login = LoginPage(driver)
+        login.autorization()
+
+        mp = MainPage(driver)
+        mp.select_cookies_notice_button()
+        mp.select_burger_button()
+
+        ug = UserAgreementPage(driver)
+        ug.select_products_button()
+
+        pp = ProductsPage(driver)
+        pp.select_sony_playstation_games_button()
+        pp.select_sony_playstation_5_games_button()
+        pp.select_sony_playstation_5_new_games_button()
+
+        cp = CatalogPage(driver)
+ 
+        cp.select_get_select_product() # добавляем первый товар в корзину
+        expected_price = cp.get_first_product_price()   # берём цену этого первого товара
+
+        tcp = ToCartPage(driver)
+       
+
+        tcp.select_minus_button()
+        time.sleep(3)
+
+        tcp.select_plus_button()
         time.sleep(3)
      
         tcp.select_cart_offer_order()
