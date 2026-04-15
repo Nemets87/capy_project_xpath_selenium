@@ -1,0 +1,26 @@
+
+-----
+Test: tests/test_cart_operations.py::test_increase_decrease_quantity_and_remove (call)
+Start time: 2026-04-15 09:20:40.861135
+Start URL: https://капибара161.рф/products/category/5382072
+
+End time: 2026-04-15 09:20:41.251674
+End name method: click
+URL: https://xn--161-5cdaaf9cq5co.xn--p1ai/products/category/5382072
+
+-----
+End time: 2026-04-15 09:20:42.399812
+End name method: click
+URL: https://xn--161-5cdaaf9cq5co.xn--p1ai/products/category/5382072?min_cost=&max_cost=&text=&productGroup=0&productCustomGroup=0&page=1&sort=1
+
+-----
+End time: 2026-04-15 09:20:42.681697
+End name method: click
+URL: https://xn--161-5cdaaf9cq5co.xn--p1ai/products/category/5382072?min_cost=&max_cost=&text=&productGroup=0&productCustomGroup=0&page=1&sort=1
+
+-----
+End time: 2026-04-15 09:20:43.262142
+End name method: click
+URL: https://xn--161-5cdaaf9cq5co.xn--p1ai/products/viewcart
+
+-----

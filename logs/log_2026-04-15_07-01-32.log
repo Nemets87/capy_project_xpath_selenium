@@ -1,0 +1,11 @@
+
+-----
+Test: tests/test_buy_all_products.py::TestBuyAllProducts::test_add_all_products_to_cart (call)
+Start time: 2026-04-15 07:01:33.433305
+Start URL: https://капибара161.рф/products/category/5382072
+
+End time: 2026-04-15 07:01:42.570873
+End name method: click
+URL: https://xn--161-5cdaaf9cq5co.xn--p1ai/products/viewcart
+
+-----

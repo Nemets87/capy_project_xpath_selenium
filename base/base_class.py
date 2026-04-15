@@ -1,6 +1,7 @@
 import allure
 import re
 import time
+from selenium.webdriver.common.action_chains import ActionChains
 from allure_commons.types import AttachmentType
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -13,6 +14,7 @@ class Base:
         self.driver = driver
         self.wait = WebDriverWait(driver, 20)
         self.logger = Logger()
+        
 
     # ---------- Базовые методы с защитой от StaleElement ----------
     def _safe_action(self, locator, action, *args, retries=3):
@@ -45,6 +47,23 @@ class Base:
         with allure.step(f"Открыть страницу: {url}"):
             self.driver.get(url)
             self.logger.add_start_step(url)
+    
+    def double_click(self, locator, retries=3):
+        """Выполнить двойной клик по элементу с повторными попытками"""
+        with allure.step(f"Двойной клик по элементу: {locator}"):
+            for attempt in range(retries):
+                try:
+                
+                    element = self.wait.until(EC.element_to_be_clickable(locator))
+                    ActionChains(self.driver).click(element).click(element).perform()
+                    # element = self.wait.until(EC.element_to_be_clickable(locator))
+                    # ActionChains(self.driver).double_click(element).perform()
+                    # self.logger.add_end_step(self.driver.current_url, "double_click")
+                    return
+                except StaleElementReferenceException:
+                    if attempt == retries - 1:
+                        raise
+                    time.sleep(0.5)
 
     def get_current_url(self):
         return self.driver.current_url
