@@ -119,9 +119,6 @@ class TestBuyProduct:
         f = FinishPage(driver)
         print("✅ Минус не отнял последний товар и не удалил из корзины")
         f.finish(expected_price=expected_price*2, actual_price=actual_price)
-<<<<<<< HEAD
         print("✅ X2 стоимость товара ибо минус не убирает с корзины в 0")
     
-=======
-        print("✅ X2 стоимость товара ибо минус не убирает с корзины в 0")
->>>>>>> ead6914 (Add smoke_16_04 commit)
+       

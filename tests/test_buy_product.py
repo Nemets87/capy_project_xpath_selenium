@@ -18,11 +18,7 @@ class TestBuyProduct:
     @allure.title("Покупка товара с максимальной ценой")
     @pytest.mark.order(6)
     def test_buy_product_1(self, driver):
-<<<<<<< HEAD
-        print("Start Test_6")
-=======
         print("✅Start Test_6")
->>>>>>> ead6914 (Add smoke_16_04 commit)
         print(f"✅ Страница загружена: {driver.title}")
 
         login = LoginPage(driver)
@@ -65,11 +61,7 @@ class TestBuyProduct:
     @allure.title("Покупка товаров полный цикл позитив самый доступный товарчик")
     @pytest.mark.order(7)
     def test_buy_product_2(self, driver):
-<<<<<<< HEAD
-        print("Start Test_7")
-=======
         print("✅Start Test_7")
->>>>>>> ead6914 (Add smoke_16_04 commit)
         print(f"✅ Страница загружена: {driver.title}")
 
         login = LoginPage(driver)

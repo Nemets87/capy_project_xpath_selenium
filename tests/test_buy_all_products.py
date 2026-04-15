@@ -5,11 +5,8 @@ from pages.category_page import CatalogPage
 
 @allure.feature("Корзина проверка")
 @allure.story("Покупка товаров")
-<<<<<<< HEAD
 @pytest.mark.order(3)
-=======
 
->>>>>>> ead6914 (Add smoke_16_04 commit)
 class TestBuyAllProducts:
 
     @allure.title("Добавление всех товаров на странице в корзину")
