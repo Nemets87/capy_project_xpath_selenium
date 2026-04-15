@@ -17,7 +17,11 @@ class TestAlphabet:
     @allure.story("Сортировка А-Я")
     @pytest.mark.order(1)
     def test_buy_product_3(self, driver):
+<<<<<<< HEAD
         print("Start Test_1")
+=======
+        print("✅Start Test_1")
+>>>>>>> ead6914 (Add smoke_16_04 commit)
         print(f"✅ Страница загружена: {driver.title}")
 
         login = LoginPage(driver)
@@ -56,7 +60,11 @@ class TestAlphabet:
     @allure.story("Сортировка Я-А")
     @pytest.mark.order(2)
     def test_buy_product_4(self, driver):
+<<<<<<< HEAD
         print("Start Test_2")
+=======
+        print("✅Start Test_2")
+>>>>>>> ead6914 (Add smoke_16_04 commit)
         print(f"✅ Страница загружена: {driver.title}")
 
         login = LoginPage(driver)

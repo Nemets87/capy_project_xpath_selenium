@@ -74,5 +74,3 @@ class TestPriceExists:
         checkout_button = (By.XPATH, "//a[contains(@class, 'checkout')]")
         assert not driver.find_elements(*checkout_button), "Кнопка оформления присутствует при пустой корзине"
         driver.save_screenshot("empty_cart_checkout.png")
-
-

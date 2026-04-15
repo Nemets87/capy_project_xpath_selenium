@@ -16,6 +16,8 @@ class TestNegative:
     @allure.title("Попытка оформления заказа с невалидными данными")
     @pytest.mark.order(9)
     def test_invalid_checkout_data(self, driver):
+        print("✅Start Test_9")
+        print(f"✅ Страница загружена: {driver.title}")
         # 1. Добавляем любой товар в корзину
         login = LoginPage(driver)
         login.autorization()
