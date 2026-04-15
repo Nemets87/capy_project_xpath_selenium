@@ -7,7 +7,6 @@ from pages.category_page import CatalogPage
 @allure.story("Покупка товаров")
 @pytest.mark.order(3)
 class TestBuyAllProducts:
-      print("Start Test_3")
 
     @allure.title("Добавление всех товаров на странице в корзину")
     def test_add_all_products_to_cart(self, driver):
