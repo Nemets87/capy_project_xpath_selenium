@@ -19,6 +19,7 @@ from selenium.webdriver.common.by import By
 
 @allure.feature("Покупка нескольких товаров")
 @allure.story("Суммирование самого дорогого и самого дешёвого")
+@pytest.mark.order(8)
 class TestBuyProductSum:
 
     @allure.title("Проверка суммы двух товаров в корзине и после оформления")
