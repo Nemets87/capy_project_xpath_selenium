@@ -46,6 +46,7 @@ def read_old_price() -> float | None:
 
 @allure.feature("Мониторинг цены")
 @allure.story("PS5 Slim")
+@pytest.mark.order(11)
 class TestPriceMonitor:
     @allure.title("Проверка наличия товара и изменения цены")
     def test_price_change(self):
