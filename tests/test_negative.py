@@ -14,6 +14,7 @@ from pages.client_information_page import ClientInformationPage
 class TestNegative:
 
     @allure.title("Попытка оформления заказа с невалидными данными")
+    @pytest.mark.order(9)
     def test_invalid_checkout_data(self, driver):
         # 1. Добавляем любой товар в корзину
         login = LoginPage(driver)
