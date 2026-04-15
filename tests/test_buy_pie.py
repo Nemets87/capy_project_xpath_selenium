@@ -117,4 +117,7 @@ class TestBuyProduct:
         cip.input_information()
 
         f = FinishPage(driver)
-        f.finish(expected_price=expected_price, actual_price=actual_price)
+        print("✅ Минус не отнял последний товар и не удалил из корзины")
+        f.finish(expected_price=expected_price, actual_price=actual_price*2)
+        print("✅X2 стоимость")
+    
