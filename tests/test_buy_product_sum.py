@@ -24,6 +24,8 @@ class TestBuyProductSum:
 
     @allure.title("Проверка суммы двух товаров в корзине и после оформления")
     def test_sum_prices(self, driver):
+        print("Start Test_8")
+        print(f"✅ Страница загружена: {driver.title}")
         # 1. Открыть главную страницу и пройти по всем пунктам меню до каталога новых игр
         login = LoginPage(driver)
         login.autorization()
@@ -86,3 +88,4 @@ class TestBuyProductSum:
 
         f = FinishPage(driver)
         f.finish(expected_price=expected_sum, actual_price=actual_sum)  # передаём ожидаемую и фактическую сумму
+        print(f"✅ Успешно")
