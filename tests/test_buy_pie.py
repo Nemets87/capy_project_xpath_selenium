@@ -19,9 +19,9 @@ class TestBuyProduct:
 
     @allure.story("Покупаем на кол-во с плюсом")
     @allure.title("Покупка товара сперва проверяем + потом -")
-    @pytest.mark.order(1)
+    @pytest.mark.order(4)
     def test_buy_product_plus_minus(self, driver):
-        print("Start Test_1")
+        print("Start Test_4")
         print(f"✅ Страница загружена: {driver.title}")
 
         login = LoginPage(driver)
@@ -72,9 +72,9 @@ class TestBuyProduct:
 
     @allure.story("Покупаем на кол-во с минус")
     @allure.title("Покупка товара сперва проверяем - потом +")
-    @pytest.mark.order(2)
+    @pytest.mark.order(5)
     def test_buy_product_minus_plus(self, driver):
-        print("Start Test_1")
+        print("Start Test_5")
         print(f"✅ Страница загружена: {driver.title}")
 
         login = LoginPage(driver)
