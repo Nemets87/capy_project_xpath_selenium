@@ -15,9 +15,9 @@ from pages.finish_page import FinishPage
 class TestAlphabet:
 
     @allure.story("Сортировка А-Я")
-    @pytest.mark.order(3)
+    @pytest.mark.order(1)
     def test_buy_product_3(self, driver):
-        print("Start Test_3")
+        print("Start Test_1")
         print(f"✅ Страница загружена: {driver.title}")
 
         login = LoginPage(driver)
@@ -54,9 +54,9 @@ class TestAlphabet:
         f.finish()
 
     @allure.story("Сортировка Я-А")
-    @pytest.mark.order(4)
+    @pytest.mark.order(2)
     def test_buy_product_4(self, driver):
-        print("Start Test_4")
+        print("Start Test_2")
         print(f"✅ Страница загружена: {driver.title}")
 
         login = LoginPage(driver)
