@@ -1,4 +1,4 @@
-name: Run Selenium Tests with Allure
+name: Run Selenium Tests with Allure 
 
 on: 
   push:
