@@ -1,0 +1,37 @@
+``gitignore
+# Виртуальное окружение
+venv/
+env/
+ENV/
+.env/
+
+# Кэш Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Логи и отчёты
+logs/
+allure-results/
+allure-report/
+screenshots/
+*.log
+
+# Файлы с ценами (кэш)
+price_cache.txt
+price_history_*.csv
+
+# Настройки IDE
+.vscode/
+.idea/
+*.iml
+
+# OS метаданные
+.DS_Store
+Thumbs.db
+
+# Файлы, сгенерированные при тестах
+.geckodriver/
+chromedriver
+geckodriver
