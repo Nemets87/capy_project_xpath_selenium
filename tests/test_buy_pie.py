@@ -65,6 +65,7 @@ class TestBuyProduct:
 
         f = FinishPage(driver)
         f.finish(expected_price=expected_price, actual_price=actual_price)
+        print("✅ Минус не отнял последний товар и не удалил из корзины")
 
 
     @allure.story("Покупаем на кол-во с минус")
