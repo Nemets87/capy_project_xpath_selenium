@@ -43,7 +43,7 @@ class TestBuyProduct:
         expected_price = cp.get_first_product_price()   # берём цену этого первого товара
 
         tcp = ToCartPage(driver)
-        tcp.select_plus_button()
+        # tcp.select_plus_button() уже в корзине 1шт
         tcp.double_click_plus()
         tcp.double_click_plus()
         tcp.double_click_plus()
